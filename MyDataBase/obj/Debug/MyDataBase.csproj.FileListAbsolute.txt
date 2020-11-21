@@ -1,0 +1,12 @@
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\MyDataBase.dll.config
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\MyDataBase.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\MyDataBase.pdb
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\EntityFramework.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\EntityFramework.xml
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\obj\Debug\MyDataBase.csprojAssemblyReference.cache
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\obj\Debug\MyDataBase.csproj.CoreCompileInputs.cache
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\obj\Debug\MyDataBase.csproj.CopyComplete
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\obj\Debug\MyDataBase.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\MyDataBase\obj\Debug\MyDataBase.pdb

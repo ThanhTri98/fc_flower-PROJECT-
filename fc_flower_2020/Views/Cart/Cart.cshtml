@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+    <div class="checkout_accrodion_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="cart_title">
+                        <h2>Giỏ hàng</h2>
+                    </div>
+                    <div class="accordion" id="accordion2">
+                        <div class="panel accordion-group">
+                            <div class="accordion-heading" id="headingFour">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <span>1</span>Phương Thức Thanh Toán
+                                </a>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" aria-labelledby="headingFour">
+                                <div class="accordion-inner">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <ul class="billing_in">
+                                                <li>
+                                                    <input id="r1" type="radio" name="billing[use_for_shipping]"
+                                                           value="1" checked="checked" title="Ship to this address"
+                                                           class="radio">
+                                                    <label for="r1">Thanh toán khi nhận hàng</label>
+                                                </li>
+                                                <li>
+                                                    <input id="r2" type="radio" name="billing[use_for_shipping]"
+                                                           value="0" title="Ship to different address" class="radio">
+                                                    <label for="r2">Thanh toán Online</label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel accordion-group">
+                            <div class="accordion-heading" id="headingFive">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                                   href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    <span>2</span>Xem Giỏ Hàng
+                                </a>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse" aria-labelledby="headingFive">
+                                <div class="accordion-inner">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                            <div id="cart-container" class="accordion_total_pricing">
+                                                <div id="title" class="flexBox-flex">
+                                                    <div class="img-item">Hình ảnh</div>
+                                                    <div class="title-item">Tiêu đề</div>
+                                                    <div class="amout-item">Số lượng</div>
+                                                    <div class="price-item">Tổng giá</div>
+                                                    <div class="del-item">Xóa</div>
+                                                </div>
+                                                <div class="item-cart flexBox-flex">
+                                                    <div class="img-item  it-img">
+                                                        <img src="~/Assets/img/product/pr1.jpg"
+                                                             width="100" height="120" />
+                                                    </div>
+                                                    <div class="title-item  it-title">Cánh én sắc xuân </div>
+                                                    <div class="amout-item  it-am">
+                                                        <select name="amout">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="price-item it-pri">1.500.000 đ</div>
+                                                    <div class="del-item it-del">
+                                                        <a href="#">
+                                                            <i class="fa fa-trash"
+                                                               aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-cart flexBox-flex">
+                                                    <div class="img-item  it-img">
+                                                        <img src="~/Assets/img/product/pr1.jpg"
+                                                             width="100" height="120" />
+                                                    </div>
+                                                    <div class="title-item  it-title">Cánh én sắc xuân </div>
+                                                    <div class="amout-item  it-am">
+                                                        <select name="amout">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="price-item it-pri">1.500.000 đ</div>
+                                                    <div class="del-item it-del">
+                                                        <a href="#">
+                                                            <i class="fa fa-trash"
+                                                               aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sum" class="flexBox-centerAll">
+                                                <div>
+                                                    <span>TỔNG HÓA ĐƠN: </span>
+                                                    <strong>3.000.000 đ</strong>
+
+                                                </div>
+                                                <div class="Continue_button continue_top place_order">
+                                                    <button type="submit" title="Submit Review" class="button">
+                                                        Đặt
+                                                        hàng
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="check_progress">
+                        <h2>CÁC LƯU Ý KHI ĐẶT HÀNG</h2>
+                        <ul id="progress_btn">
+                            <li><i class="fa fa-minus"></i>Hoa sẽ được giao trong vòng 2 giờ</li>
+                            <li><i class="fa fa-minus"></i>Giữ điện thoại để shipper liên hệ</li>
+                            <li><i class="fa fa-minus"></i>Bạn sẽ chịu trách nhiệm khi bùng kèo</li>
+                            <li><i class="fa fa-minus"></i>Thanh toán Online sẽ được giảm 10.000 đồng</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

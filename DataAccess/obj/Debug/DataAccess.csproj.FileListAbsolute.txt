@@ -1,0 +1,15 @@
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\MyDataBase.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\MyDataBase.pdb
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\MyDataBase.dll.config
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower_2020\DataAccess\obj\Debug\DataAccess.pdb
