@@ -16,9 +16,10 @@ namespace MyDataBase
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ma_loai_hoa { get; set; }
+        [StringLength(50)]
+        public string ma_loai_hoa { get; set; }
 
+        [Required]
         [StringLength(255)]
         public string ten_loai_hoa { get; set; }
 

@@ -25,7 +25,9 @@ namespace MyDataBase
         [Column(TypeName = "ntext")]
         public string mo_ta { get; set; }
 
-        public int? ma_loai { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string ma_loai { get; set; }
 
         [StringLength(255)]
         public string hinh_anh { get; set; }

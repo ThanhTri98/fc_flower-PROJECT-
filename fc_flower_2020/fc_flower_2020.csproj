@@ -128,11 +128,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\GiftController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GiftModel.cs" />
+    <Compile Include="Models\LayoutMainModel.cs" />
+    <Compile Include="Models\ListExtentions.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,18 +208,6 @@
     <Content Include="Assets\img\logo\logo3.png" />
     <Content Include="Assets\img\logo\logo4.png" />
     <Content Include="Assets\img\payment\payment.png" />
-    <Content Include="Assets\img\product\pr1.jpg" />
-    <Content Include="Assets\img\product\pr10.png" />
-    <Content Include="Assets\img\product\pr11.png" />
-    <Content Include="Assets\img\product\pr12.png" />
-    <Content Include="Assets\img\product\pr2.png" />
-    <Content Include="Assets\img\product\pr3.png" />
-    <Content Include="Assets\img\product\pr4.png" />
-    <Content Include="Assets\img\product\pr5.png" />
-    <Content Include="Assets\img\product\pr6.png" />
-    <Content Include="Assets\img\product\pr7.png" />
-    <Content Include="Assets\img\product\pr8.png" />
-    <Content Include="Assets\img\product\pr9.png" />
     <Content Include="Assets\img\slider-image\1.jpg" />
     <Content Include="Assets\img\slider-image\2.jpg" />
     <Content Include="Assets\img\slider-image\3.jpg" />
@@ -287,13 +281,14 @@
     <Content Include="Assets\img\arrow\Thumbs.db" />
     <Content Include="Assets\img\author\Thumbs.db" />
     <Content Include="Assets\img\branding-image\Thumbs.db" />
-    <Content Include="Assets\img\collection-image\Thumbs.db" />
     <Content Include="Assets\img\logo\Thumbs.db" />
     <Content Include="Assets\img\payment\Thumbs.db" />
-    <Content Include="Assets\img\product\Thumbs.db" />
     <Content Include="Assets\img\slider-image\Thumbs.db" />
     <Content Include="Assets\img\slider\Thumbs.db" />
     <Content Include="Assets\img\social\Thumbs.db" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -405,10 +400,12 @@
     <Content Include="Views\Cart\Cart.cshtml" />
     <Content Include="Views\Shared\LayoutMain.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Gift\GiftHome.cshtml" />
+    <Content Include="Views\Gift\GiftType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Assets\img\product\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,136 @@
+﻿@using fc_flower_2020.Models
+@using MyDataBase
+@{
+    ViewBag.Title = "GiftType";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb-single breadcrumb_top">
+                    <ul id="breadcrumbs">
+                        <li><a href="/trang-chu"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+                        <li><span>I</span></li>
+                        <li><a>QUÀ TẶNG KÈM</a></li>
+                        <li><span>I</span></li>
+                        <li>@ViewBag.NAME</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs area -->
+<!-- Start preview Product details area -->
+<div class="blog_single_view_area">
+    <div class="container">
+        <div class="row">
+            <div id="left" class="col-lg-9 col-md-6 col-sm-12 col-xs-12 r_item">
+                @{ List<QuaTangKem> quaTangKems = Model as List<QuaTangKem>;
+                    int items = 4; // Tổng số item trên 1 hàng
+                    int row = 0; // Khởi tạo cột
+                    int modulo = 0; // Phần dư để tránh trường hợp về tràn mảng hoặc thiếu data
+                    int current = 0; // Index sẽ tăng 1 sau khi 1 sản phẩm được display
+                    if (quaTangKems.Count != 0) // Nếu có giá trị trong List mới bắt đầu gán giá trị
+                    {
+                        if (quaTangKems.Count < items)
+                        {
+                            row = 0; // = 0 vì phép chia số nhỏ cho lớn aut0 = 0 -> Cho dù có hoa nhưng vẫn không display lên được
+                        }
+                        else
+                        {
+                            row = quaTangKems.Count / items;
+                            // Nếu phần dư !=0 thì tăng row lên 1 đồng thời lưu lại phần dư đó
+                        }
+                        if ((modulo = quaTangKems.Count % items) != 0) { ++row; }
+                    }
+
+
+                }
+
+                @for (int i = 0; i < row; i++)
+                {
+                    <div class="row product-margin">
+                        <div class="col-lg-12">
+                            @{ if (i == row - 1)
+                                {
+                                    items = modulo != 0 ? modulo : items;
+                                }
+                            }
+                            @for (int j = 0; j < items; j++)
+                            {
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="product_list">
+                                        <div class="single_product">
+                                            <a class="gift"><img src="~/@(quaTangKems[current].hinh_anh)" alt="" /></a>
+                                            <div class="product_details">
+                                                <div class="title">@quaTangKems[current].ten_qua</div>
+                                                <div class="price">
+                                                    <span class="popular_price">@Utils.toCurrency((int)@quaTangKems[current++].gia)</span>
+                                                </div>
+                                            </div>
+                                            <div class="product_detail">
+                                                <div class="product_button">
+                                                    <div class="cart_details">
+                                                        <a href="cart.html" target="blank">Thêm vào giỏ hàng</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span id="ctl00_cphContent_ucKeywordItems_ucItems_rptItems_ctl03_lblNew"
+                                                  class="ibadge inew"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+            <div id="content" class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <div id="top-rt">
+                    <h3 class="title-rt">QUÀ TẶNG KÈM</h3>
+                    <ul>
+                        @{ List<string[]> list = ViewBag.LIST as List<string[]>;}
+                        @foreach (string[] s in list)
+                        {
+                            <li class="@(ViewBag.MALOAI == s[0]?"active":"")"><a href="@s[0]">@s[1]</a></li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="rt">
+                    <div class="t">
+                        <div class="order">
+                            <a id="ctl00_cphContent_ucLargeOrder_hplLargeOrder" title="Đặt hoa số lượng lớn"
+                               href="#">
+                                <img id="ctl00_cphContent_ucLargeOrder_imgLargeOrder"
+                                     alt="Đặt hoa số lượng lớn" title="Đặt hoa số lượng lớn"
+                                     src="~/Assets/img/dat-hoa-so-luong-lon.png" style="border-width:0px;">
+                            </a>
+                        </div>
+                        <div class="discount">
+                            <h4>
+                                Giảm 20.000đ
+                            </h4>
+                            <span>
+                                Nhằm khuyến khích mọi người quen sử dụng website trong việc giao dịch thương mại
+                                điện tử, Chúng tôi tặng cho mỗi đơn hàng 20.000đ nều bạn mua hoa trực tiếp từ
+                                webiste.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

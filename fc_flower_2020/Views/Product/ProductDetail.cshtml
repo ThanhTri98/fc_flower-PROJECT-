@@ -1,4 +1,4 @@
-﻿
+﻿@using fc_flower_2020.Models
 @{
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
@@ -10,9 +10,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="breadcrumb-single breadcrumb_top">
                     <ul id="breadcrumbs">
-                        <li><a href=""><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href=""><i class="fa fa-home"></i>TRANG CHỦ</a></li>
                         <li><span>I</span></li>
-                        <li>LOREM IPSUM DOLOR</li>
+                        <li>HOA</li>
                     </ul>
                 </div>
             </div>
@@ -24,14 +24,15 @@
 <div class="blog_single_view_area">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="my_tabs" style="border: 1px solid #a49c9c;">
                     <div class="tab-content tab_content_style">
                         <div class="tab-pane fade in active">
                             <div class="blog_tabs" style="padding: 15px;">
-                                <a class="fancybox" href="~Assets/img/product/pr1.jpg" data-fancybox-group="gallery"
-                                   title="HOA SINH NHẬT BA MẸ - I'M YOURS">
-                                    <img src="~Assets/img/product/pr1.jpg"
+                                <a class="fancybox" href="~/Assets/img@(Model.hinh_anh)" data-fancybox-group="gallery"
+                                   title="@Model.tieu_de">
+                                    <img src="~/Assets/img@(Model.hinh_anh)"
                                          alt="" />
                                 </a>
                             </div>
@@ -40,16 +41,16 @@
                     </div>
                     <div class="product-bottom">
                         <div class="maSP">
-                            Mã SP: <div>&nbsp;1</div>
+                            Mã SP: <div>&nbsp;@Model.ma_hoa</div>
                         </div>
                         <div class="line">
                             <div></div>
                         </div>
                         <div class="giaCu">
-                            Giá cũ:&nbsp; <div>605.000 đ</div>
+                            Giá cũ:&nbsp; <div>@Utils.toCurrency((int)Model.gia_cu)</div>
                         </div>
                         <div class="giaMoi">
-                            Giá mới:&nbsp; <div>550.000 đ</div>
+                            Giá mới:&nbsp; <div>@Utils.toCurrency((int)Model.gia_moi)</div>
                         </div>
                         <p style="  font-size: 11px;">(Giá đã bao gồm 10% VAT)</p>
                         <div class="add-to-cart">
@@ -65,13 +66,11 @@
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 r_item">
                 <div class="blog_product_details">
-                    <h2 class="blog_heading"><a href="">HOA SINH NHẬT BA MẸ - I'M YOURS</a></h2>
+                    <h2 class="blog_heading"><a>@(Model.tieu_de)</a></h2>
 
                     <div class="pricing_rate">
                         <p class="blog_texts">
-                            “I’m yours – Anh là của em” là một bó hoa tỏ tình mộc mạc, dễ thương.
-                            Còn gì tuyệt vời hơn khi người ấy lắng nghe thông điệp từ trái tim bạn, trong tình cảm
-                            này: chúng ta là của nhau. Hãy bên nhau mãi nhé!
+                            @Model.mo_ta
                         </p>
                     </div>
 
@@ -124,11 +123,10 @@
                 <div class="rt">
                     <div class="t">
                         <div class="order">
-                            <a id="ctl00_cphContent_ucLargeOrder_hplLargeOrder" title="Đặt hoa số lượng lớn"
-                               href="#">
+                            <a id="ctl00_cphContent_ucLargeOrder_hplLargeOrder" title="Đặt hoa số lượng lớn">
                                 <img id="ctl00_cphContent_ucLargeOrder_imgLargeOrder"
                                      alt="Đặt hoa số lượng lớn" title="Đặt hoa số lượng lớn"
-                                     src="~Assets/img//dat-hoa-so-luong-lon.png" style="border-width:0px;">
+                                     src="~/Assets/img//dat-hoa-so-luong-lon.png" style="border-width:0px;">
                             </a>
                         </div>
                         <div class="discount">
@@ -156,65 +154,28 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="feature_text feature_upsell">
-                    <h4>Sản Phẩm Đồng Giá</h4>
+                    <h4>Sản Phẩm Tương Tự</h4>
                 </div>
                 <div class="row">
                     <div class="upsell_product_list">
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr1.jpg" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
+                        @{ List<MyDataBase.Hoa> hoaCungLoais = (List<MyDataBase.Hoa>)ViewBag.CungLoai;}
+                        @foreach (MyDataBase.Hoa hoa in hoaCungLoais)
+                        {
+                            <div class="col-lg-3">
+                                <div class="single_upsell">
+                                    <a href="/chi-tiet-san-pham/@hoa.ma_hoa"><img src="~/Assets/img@(hoa.hinh_anh)" alt="" /></a>
+                                    <div class="upsell_details">
+                                        <div class="title"><a href="">@hoa.tieu_de</a></div>
+                                        <div class="price">
+                                            <span class="regular_price">@Utils.toCurrency((int)hoa.gia_cu)</span>
+                                            <span class="popular_price">@Utils.toCurrency((int)hoa.gia_moi)</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr11.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr7.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr5.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr3.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -228,65 +189,28 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="feature_text feature_upsell">
-                    <h4>Sản Phẩm Cùng Loại</h4>
+                    <h4>Sản Phẩm Đồng Giá</h4>
                 </div>
                 <div class="row">
                     <div class="upsell_product_list">
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr7.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
+                        @{ List<MyDataBase.Hoa> hoaDongGias = (List<MyDataBase.Hoa>)ViewBag.DongGia;}
+                        @foreach (MyDataBase.Hoa hoa in hoaDongGias)
+                        {
+                            <div class="col-lg-3">
+                                <div class="single_upsell">
+                                    <a href="/chi-tiet-san-pham/@hoa.ma_hoa"><img src="~/Assets/img@(hoa.hinh_anh)" alt="" /></a>
+                                    <div class="upsell_details">
+                                        <div class="title"><a href="">@hoa.tieu_de</a></div>
+                                        <div class="price">
+                                            <span class="regular_price">@Utils.toCurrency((int)hoa.gia_cu)</span>
+                                            <span class="popular_price">@Utils.toCurrency((int)hoa.gia_moi)</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr7.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr7.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr7.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_upsell">
-                                <a href="#"><img src="~Assets/img/product/pr7.png" alt="" /></a>
-                                <div class="upsell_details">
-                                    <div class="title"><a href="">Vivamus eu imper</a></div>
-                                    <div class="price">
-                                        <span class="regular_price">550.000 đ</span> <span class="popular_price">500.000 đ</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        }
+
+
                     </div>
                 </div>
             </div>

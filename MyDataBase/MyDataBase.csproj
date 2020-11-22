@@ -50,11 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADO_FcFlower.cs" />
     <Compile Include="ChiTietDonHang.cs" />
     <Compile Include="ChuDe.cs" />
     <Compile Include="CuaHang.cs" />
     <Compile Include="DonHang.cs" />
-    <Compile Include="FcFlowerADO.cs" />
     <Compile Include="Hoa.cs" />
     <Compile Include="LoaiHoa.cs" />
     <Compile Include="LoaiQuaTang.cs" />

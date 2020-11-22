@@ -16,8 +16,8 @@ namespace MyDataBase
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ma_mau_sac { get; set; }
+        [StringLength(50)]
+        public string ma_mau_sac { get; set; }
 
         [StringLength(255)]
         public string ten_mau_sac { get; set; }

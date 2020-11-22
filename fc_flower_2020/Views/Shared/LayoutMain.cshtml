@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using fc_flower_2020.Models
+@using MyDataBase
+<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -6,7 +8,7 @@
         ============================================ -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    
+
     <meta name="description" content="">
     <!-- Mobile specific metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,25 +90,13 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="cart.html">
+                                <a href="gio-hang">
                                     <i class="fa fa-shopping-cart"></i>Giỏ hàng <span class="cart_zero">2</span>
                                 </a>
                                 <div class="cart_down_area">
                                     <div class="cart_single"
                                          style="display: flex;justify-content: center;align-items: center;">
                                         <a href="#"><img src="~/Assets/img/cart/cart-1.jpg" alt="" /></a>
-                                        <div>
-                                            <h2><a href="#">Pellentesque hendrerit</a></h2>
-                                            <div class="price_cart_contain">
-                                                <p class="amount_cart">1</p>
-                                                <p class="nhan">x</p>
-                                                <p class="price_cart">550.000 đ</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="cart_single">
-                                        <a href="#"><img src="~/Assets/img/cart/cart-2.jpg" alt="" /></a>
                                         <div>
                                             <h2><a href="#">Pellentesque hendrerit</a></h2>
                                             <div class="price_cart_contain">
@@ -138,44 +128,44 @@
                     <div class="main_menu">
                         <ul id="nav_menu" class="active_cl">
                             <li>
-                                <a href="trang-chu"><span class="Home">Trang Chủ</span></a>
+                                <a href="/trang-chu"><span class="Home">Trang Chủ</span></a>
 
                             </li>
                             <li>
-                                <a href="#"><span class="Clothings">Chủ Đề</span></a>
+                                <a href="/san-pham/chu-de/hoa-cuoi"><span class="Clothings">Chủ Đề</span></a>
                                 <div class="home_mega_menu">
-                                    <a href="#">Hoa tặng mẹ</a>
-                                    <a href="#">Hoa tình yêu</a>
-                                    <a href="#">Hoa sinh nhật</a>
-                                    <a href="#">Hoa cưới</a>
-                                    <a href="#">Hoa sự kiện</a>
-                                    <a href="#">Hoa trang trí tiệc</a>
+                                    @{ LayoutMainModel layoutMain = new LayoutMainModel();
+                                        List<ChuDe> danhSachChuDe = layoutMain.getDanhSachChuDe();}
+                                    @foreach (ChuDe chuDe in danhSachChuDe)
+                                    {
+                                        <a href="/san-pham/chu-de/@chuDe.ma_chu_de">@chuDe.ten_chu_de</a>
+                                    }
                                 </div>
                             </li>
                             <li>
-                                <a href="#"><span class="Footwear">Màu Sắc</span></a>
+                                <a href="/san-pham/mau-sac/mau-hong"><span class="Footwear">Màu Sắc</span></a>
                                 <div class="home_mega_menu">
-                                    <a href="#">Hồng</a>
-                                    <a href="#">Hoa tình yêu</a>
-                                    <a href="#">Hoa sinh nhật</a>
-                                    <a href="#">hoa sự kiện</a>
-                                    <a href="#">hoa giảm giá</a>
+                                    @{ List<MauSac> danhSachMauSac = layoutMain.getDanhSachMauSac();}
+                                    @foreach (MauSac mauSac in danhSachMauSac)
+                                    {
+                                        <a href="/san-pham/mau-sac/@mauSac.ma_mau_sac">@mauSac.ten_mau_sac</a>
+                                    }
                                 </div>
                             </li>
                             <li>
-                                <a href="#"><span class="Footwear">Quà Tặng Kèm</span></a>
+                                <a href="/qua-tang-kem"><span class="Footwear">Quà Tặng Kèm</span></a>
                                 <div class="home_mega_menu">
-                                    <a href="#">Hoa tặng mẹ</a>
-                                    <a href="#">Hoa tình yêu</a>
-                                    <a href="#">Hoa sinh nhật</a>
-                                    <a href="#">hoa sự kiện</a>
-                                    <a href="#">hoa giảm giá</a>
+                                    @{ List<LoaiQuaTang> danhSachLoaiQua = layoutMain.getDanhSachLoaiQua();}
+                                    @foreach (LoaiQuaTang loaiQua in danhSachLoaiQua)
+                                    {
+                                        <a href="/qua-tang-kem/@loaiQua.ma_loai">@loaiQua.ten_loai</a>
+                                    }
                                 </div>
                             </li>
                             <li>
-                                <a href="#"><span class="Sales">Ý Nghĩa Hoa</span></a>
+                                <a href="/y-nghia-hoa"><span class="Sales">Ý Nghĩa Hoa</span></a>
                             </li>
-                            <li><a href="about-us.html"><span class="Accessaries">Giới Thiệu</span></a>
+                            <li><a href="#"><span class="Accessaries">Giới Thiệu</span></a>
                         </ul>
                     </div>
                 </div>
@@ -184,7 +174,7 @@
         </div>
     </div>
     <!--End Main Menu area -->
-   @RenderBody()
+    @RenderBody()
     <!--Start Branding area -->
     <div class="branding_area">
         <div class="container">

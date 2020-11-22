@@ -19,9 +19,6 @@ namespace MyDataBase
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ma_hoa { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ma_qua { get; set; }
 
         public byte? so_luong { get; set; }

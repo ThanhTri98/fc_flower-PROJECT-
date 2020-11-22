@@ -16,8 +16,8 @@ namespace MyDataBase
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ma_loai { get; set; }
+        [StringLength(50)]
+        public string ma_loai { get; set; }
 
         [StringLength(255)]
         public string ten_loai { get; set; }

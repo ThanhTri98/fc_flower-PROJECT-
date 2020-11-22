@@ -33,9 +33,11 @@ namespace MyDataBase
         [Column(TypeName = "ntext")]
         public string mo_ta { get; set; }
 
-        public int? ma_loai_hoa { get; set; }
+        [StringLength(50)]
+        public string ma_loai_hoa { get; set; }
 
-        public int? ma_mau_sac { get; set; }
+        [StringLength(50)]
+        public string ma_mau_sac { get; set; }
 
         public int? ma_tth { get; set; }
 

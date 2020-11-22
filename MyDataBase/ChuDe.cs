@@ -16,8 +16,8 @@ namespace MyDataBase
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ma_chu_de { get; set; }
+        [StringLength(255)]
+        public string ma_chu_de { get; set; }
 
         [StringLength(255)]
         public string ten_chu_de { get; set; }
