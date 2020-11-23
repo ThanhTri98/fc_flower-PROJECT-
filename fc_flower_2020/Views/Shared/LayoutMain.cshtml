@@ -78,13 +78,21 @@
                     <div class="account_card_area">
                         <ul id="account_nav">
                             <li>
-                                <a href="#"><i class="fa fa-key"></i>Tài khoản</a>
+                                @{ TaiKhoan taiKhoan = Session["TAIKHOAN"] as TaiKhoan;
+                                    string ho_ten = taiKhoan == null ? "Tài khoản" : taiKhoan.ho_ten;}
+                                <a><i class="fa fa-key"></i>@ho_ten</a>
                                 <div class="account_menu_list">
                                     <div class="account_single_item">
                                         <ul id="account_single_nav_3">
-                                            <li><a href="/Account/Profile">Thông tin cá nhân</a></li>
-
-                                            <li><a href="login-or-register.html">Đăng nhập/ Đăng ký</a></li>
+                                            @if (taiKhoan == null)
+                                            {
+                                                <li><a href="/tai-khoan">Đăng nhập/ Đăng ký</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/trang-ca-nhan">Thông tin cá nhân</a></li>
+                                                <li><a href="/Account/Logout">Đăng xuất</a></li>
+                                            }
                                         </ul>
                                     </div>
                                 </div>
@@ -165,7 +173,7 @@
                             <li>
                                 <a href="/y-nghia-hoa"><span class="Sales">Ý Nghĩa Hoa</span></a>
                             </li>
-                            <li><a href="#"><span class="Accessaries">Giới Thiệu</span></a>
+                            <li><a href="/gioi-thieu"><span class="Accessaries">Giới Thiệu</span></a>
                         </ul>
                     </div>
                 </div>

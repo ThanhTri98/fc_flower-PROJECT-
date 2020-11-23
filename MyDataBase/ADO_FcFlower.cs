@@ -128,7 +128,7 @@ namespace MyDataBase
                 .IsUnicode(false);
 
             modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.ngay_sinh)
+                .Property(e => e.ho_ten)
                 .IsUnicode(false);
 
             modelBuilder.Entity<YNghiaHoa>()

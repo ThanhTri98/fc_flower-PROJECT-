@@ -14,11 +14,7 @@ namespace fc_flower_2020
                 url: "trang-chu",
                 defaults: new { controller = "Home", action = "Index" }
             );
-            routes.MapRoute(
-               name: "Profile",
-               url: "trang-ca-nhan",
-               defaults: new { controller = "Account", action = "Profile" }
-           );
+            
             routes.MapRoute(
               name: "ProductDetail",
               url: "chi-tiet-san-pham/{id}",
@@ -54,6 +50,21 @@ namespace fc_flower_2020
            url: "gio-hang",
            defaults: new { controller = "Cart", action = "Cart" }
        );
+            routes.MapRoute(
+           name: "AbouUs",
+           url: "gioi-thieu",
+           defaults: new { controller = "Home", action = "AboutUs" }
+       );
+            routes.MapRoute(
+           name: "Login-Register",
+           url: "tai-khoan",
+           defaults: new { controller = "Account", action = "LoginOrRegister" }
+       );
+            routes.MapRoute(
+         name: "Profile",
+         url: "trang-ca-nhan",
+         defaults: new { controller = "Account", action = "Profile" }
+     );
             routes.MapRoute(
              name: "Default",
              url: "{controller}/{action}/{id}",

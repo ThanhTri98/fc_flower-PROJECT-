@@ -4,90 +4,221 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
-    <div class="my_account_page_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="create_account">
-                        <h2>ĐĂNG NHẬP HOẶC TẠO TÀI KHOẢN MỚI</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="new_customer">
-                        <h3>Chưa có tài khoản?</h3>
-                        <ul class="register_form">
-                            <li>Email<span>*</span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="email_test" />
-                                </div>
-                            </li>
-                            <li>Mật khẩu<span>*</span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="password" />
-                                </div>
-                            </li>
-                            <li>Họ tên<span>*</span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="password" />
-                                </div>
-                            </li>
-                            <li>Địa chỉ<span>*</span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="password" />
-                                </div>
-                            </li>
-                            <li>Số điện thoại<span></span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="password" />
-                                </div>
-                            </li>
-                            <li><h2><span>*</span>Email đã có người sử dụng!!!</h2></li>
-                        </ul>
-                        <div class="create_button_area">
-                            <button type="submit" class="create_button">
-                                Tạo tài khoản
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="new_customer">
-                        <h3>Đã có tài khoản</h3>
-                        <p style="color: rgb(0, 143, 95);">Nếu bạn đã có tài khoản tại trang web fcflower.com, xin hãy đăng nhập.</p>
-                        <ul class="register_form">
-                            <li>Email<span>*</span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="email_test" />
-                                </div>
-                            </li>
-                            <li>Mật khẩu<span>*</span></li>
-                            <li>
-                                <div class="email_address">
-                                    <input type="text" class="password" />
-                                </div>
-                            </li>
-
-                            <li><h2><span>*</span>Tài khoản hoặc mật khẩu không chính xác!!!</h2></li>
-                        </ul>
-                        <div class="create_button_area">
-                            <a href="">Bạn không nhớ mật khẩu?</a>
-                            <button type="submit" class="create_button">
-                                Đăng nhập
-                            </button>
-                        </div>
-                    </div>
-
+<div class="my_account_page_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="create_account">
+                    <h2>ĐĂNG NHẬP HOẶC TẠO TÀI KHOẢN MỚI</h2>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="new_customer">
+                    <h3>Chưa có tài khoản?</h3>
+                    <ul class="register_form">
+                        <li>Tài khoản<span>*</span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="regis-username" type="text" class="email_test" />
+                            </div>
+                        </li>
+                        <li>Mật khẩu<span>*</span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="regis-password" type="password" class="password" />
+                            </div>
+                        </li>
+                        <li>Họ tên<span>*</span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="regis-fullname" type="text" class="password" />
+                            </div>
+                        </li>
+                        <li>Giới tính<span></span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="regis-gender" type="text" class="password" />
+                            </div>
+                        </li>
+                        <li>Địa chỉ<span></span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="regis-address" type="text" class="password" />
+                            </div>
+                        </li>
+                        <li>Email<span>*</span></li>
+                        <li>
+                            <div id="email-warning" class="email_address">
+                                <input id="regis-email" type="text" class="email_test" />
+                            </div>
+                        </li>
+                        <li>Số điện thoại<span>*</span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="regis-phone" type="text" class="password" />
+                            </div>
+                        </li>
+                        <li><h2 id="regis-hidden"><span id="regis-warning">*</span></h2></li>
+                    </ul>
+                    <div class="create_button_area">
+                        <button id="regis-submit" class="create_button">
+                            Tạo tài khoản
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="new_customer">
+                    <h3>Đã có tài khoản</h3>
+                    <p style="color: rgb(0, 143, 95);">Nếu bạn đã có tài khoản tại trang web fcflower.com, xin hãy đăng nhập.</p>
+
+                    <ul class="register_form">
+                        <li>Tài khoản<span>*</span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="login-username" type="text" class="email_test" />
+                            </div>
+                        </li>
+                        <li>Mật khẩu<span>*</span></li>
+                        <li>
+                            <div class="email_address">
+                                <input id="login-password" type="password" class="password" />
+                            </div>
+                        </li>
+                        <li><h2 id="login-hidden"><span id="login-warning">*</span></h2></li>
+                    </ul>
+                    <div class="create_button_area">
+                        <a href="">Bạn không nhớ mật khẩu?</a>
+                        <button id="login-submit" type="submit" class="create_button">
+                            Đăng nhập
+                        </button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
+<script src="~/Assets/js/vendor/jquery-1.11.3.min.js"></script>
+<script>
+    $(document).keypress(function (event) {
+        // Bắt sự kiện nhấn enter
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            senDataLogin();
+        }
+    });
+
+    $(document).ready(function () {
+        $('#login-submit').on('click', function () {
+            sendDataLogin();
+        });
+        $('#regis-submit').on('click', function () {
+            sendDataRegister();
+        });
+    });
+    function sendDataLogin() {
+        var username = $('#login-username').val();
+        var password = $('#login-password').val();
+        var warning = $('#login-warning');
+        var hiddden = $('#login-hidden');
+        if (username == '' || password == '') {
+            hiddden.css('display', 'block');
+            warning.html('Vui lòng nhập đầy đủ Tài khoản và Mật khẩu!');
+            return;
+        }
+        // Khởi tại dữ liệu để gửi về controller xử lý
+        var formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Account/Login', true);
+        xhr.onreadystatechange = function () {
+            // 1 request gửi đi thì server xử lý qua 4 bước
+            // -- 1: Gửi Request
+            // -- 2: Server nhận request
+            // -- 3: Server xử lý
+            // -- 4: Server trả về kết quả
+            if (xhr.readyState == 4 && xhr.status == 200) { // Chỉ bắt sự kiện tại giai đoạn 4 và kết quả trả về có status là 200
+                var content = xhr.responseText;
+                var json_data = JSON.parse(content);
+                if (json_data.Data.status == 'OK') {
+                    window.location = 'trang-chu';
+                } else {
+                    hiddden.css('display', 'block');
+                    warning.html('Tài khoản hoặc Mật khẩu không chính xác!');
+                }
+            }
+        };
+        xhr.send(formData);
+    }
+    function sendDataRegister() {
+        var warning = $('#regis-warning');
+        var hiddden = $('#regis-hidden');
+
+        var username = $('#regis-username').val();
+        var password = $('#regis-password').val();
+        var email = $('#regis-email').val();
+        var address = $('#regis-address').val();
+        var gender = $('#regis-gender').val();
+        var fullname = $('#regis-fullname').val();
+        var phone = $('#regis-phone').val();
+        if (password.length < 6) {
+            hiddden.css('display', 'block');
+            warning.html('Mật khẩu phải từ 6 ký tự trở lên!');
+            return;
+        }
+        if (username == '' || email == '' || address == '' || fullname == '' || phone == '') {
+            hiddden.css('display', 'block');
+            warning.html('Vui lòng nhập đầy đủ các trường bắt buộc (*)!');
+            return;
+        }
+        // Khởi tại dữ liệu để gửi về controller xử lý
+        var formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('email', email);
+        formData.append('address', address);
+        formData.append('gender', gender);
+        formData.append('fullname', fullname);
+        formData.append('phone', phone);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Account/Register', true);
+        xhr.onreadystatechange = function () {
+            // 1 request gửi đi thì server xử lý qua 4 bước
+            // -- 1: Gửi Request
+            // -- 2: Server nhận request
+            // -- 3: Server xử lý
+            // -- 4: Server trả về kết quả
+            if (xhr.readyState == 4 && xhr.status == 200) { // Chỉ bắt sự kiện tại giai đoạn 4 và kết quả trả về có status là 200
+                var content = xhr.responseText;
+                var json_data = JSON.parse(content);
+                if (json_data.Data.status == 'OK') {
+                    hiddden.css('display', 'block');
+                    warning.html(json_data.Data.message);
+                    // Gán sẵn tài khoản và mật khẩu vào form đăng nhập
+                    $('#login-username').val(username);
+                    $('#login-password').val(password)
+                    // xóa sạch dữ liệu trong form đăng ký
+                    $('#regis-username').val('');
+                    $('#regis-password').val('');
+                    $('#regis-email').val('');
+                    $('#regis-address').val('');
+                    $('#regis-gender').val('');
+                    $('#regis-fullname').val('');
+                    $('#regis-phone').val('');
+                } else {
+                    hiddden.css('display', 'block');
+                    warning.html(json_data.Data.message);
+                }
+            }
+        };
+        xhr.send(formData);
+    }
+</script>
 

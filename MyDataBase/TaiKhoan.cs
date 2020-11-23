@@ -18,7 +18,8 @@ namespace MyDataBase
         [Key]
         [StringLength(255)]
         public string tai_khoan { get; set; }
-
+        [StringLength(255)]
+        public string ho_ten { get; set; }
         [StringLength(255)]
         public string mat_khau { get; set; }
 
@@ -33,9 +34,6 @@ namespace MyDataBase
 
         [StringLength(255)]
         public string gioi_tinh { get; set; }
-
-        [StringLength(255)]
-        public string ngay_sinh { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonHang> DonHang { get; set; }

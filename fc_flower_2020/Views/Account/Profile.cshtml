@@ -16,36 +16,38 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="new_customer">
                         <h3>Thông tin cá nhân</h3>
+                        @{MyDataBase.TaiKhoan taiKhoan = Session["TAIKHOAN"] as MyDataBase.TaiKhoan;}
                         <form action="#">
                             <ul class="register_form">
-                                <li>Email<span>*</span></li>
-                                <li>
-                                    <div class="email_address">
-                                        <input type="text" class="email_test" />
-                                    </div>
-                                </li>
-                                <li>Mật khẩu<span>*</span></li>
-                                <li>
-                                    <div class="email_address">
-                                        <input type="text" class="password" />
-                                    </div>
-                                </li>
                                 <li>Họ tên<span>*</span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" />
+                                        <input type="text" class="email_test"  value="@taiKhoan.ho_ten"/>
+                                    </div>
+                                </li>
+                                
+                                <li>Giới tính<span>*</span></li>
+                                <li>
+                                    <div class="email_address">
+                                        <input type="text" class="password" value="@taiKhoan.gioi_tinh"/>
                                     </div>
                                 </li>
                                 <li>Địa chỉ<span>*</span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" />
+                                        <input type="text" class="password" value="@taiKhoan.dia_chi"/>
                                     </div>
                                 </li>
-                                <li>Số điện thoại<span></span></li>
+                                <li>Email<span>*</span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" />
+                                        <input type="text" class="password" value="@taiKhoan.email"/>
+                                    </div>
+                                </li>
+                                <li>Số điện thoại<span>*</span></li>
+                                <li>
+                                    <div class="email_address">
+                                        <input type="text" class="password" value="@taiKhoan.so_dien_thoai"/>
                                     </div>
                                 </li>
                                 <li>
