@@ -74,7 +74,9 @@ namespace MyDataBase
             modelBuilder.Entity<LoaiHoa>()
                 .Property(e => e.ma_loai_hoa)
                 .IsUnicode(false);
-
+            modelBuilder.Entity<LoaiHoa>()
+             .Property(e => e.hinh_anh)
+             .IsUnicode(false);
             modelBuilder.Entity<LoaiQuaTang>()
                 .Property(e => e.ma_loai)
                 .IsUnicode(false);
@@ -127,10 +129,6 @@ namespace MyDataBase
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.ngay_sinh)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<YNghiaHoa>()
-                .Property(e => e.hinh_anh)
                 .IsUnicode(false);
 
             modelBuilder.Entity<YNghiaHoa>()

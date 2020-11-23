@@ -1141,6 +1141,19 @@ ul#nav_menu {
     visibility: visible;
 }
 
+.gift-title .title-margin {
+    margin-bottom: 10px;
+}
+
+    .gift-title .title-margin a {
+        font-weight: 600;
+        font-size: 16px;
+        text-transform: uppercase;
+        clear: both;
+        color: #bd2026;
+        background-color: #FFFFFF;
+    }
+
 .single_product img {
     -webkit-transition: all 0.3s linear;
     -moz-transition: all 0.3s linear;
@@ -1176,7 +1189,7 @@ ul#nav_menu {
         color: #666;
     }
 
-    .product_details .title {
+    .product_details .title, .prhoa .title {
         padding: 3px 0;
         background: #0d6c4d;
         color: white;
@@ -1187,6 +1200,20 @@ ul#nav_menu {
         font-weight: bold;
         line-height: 22px;
     }
+.title-y-nghia-hoa {
+    font-weight: bold;
+    color: white;
+    padding: 8px 20px;
+    background-color: #bd2026;
+    width: fit-content;
+    font-size: 15px;
+}
+.prhoa .y-nghia-hoa {
+    font-size: 14px;
+    background: #bebebe85;
+    color: #515151;
+    overflow: hidden;
+}
 
     .product_details .regular_price {
         color: #898989;

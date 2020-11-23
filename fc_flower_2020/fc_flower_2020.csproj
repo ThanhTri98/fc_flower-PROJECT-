@@ -128,12 +128,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\FlowerMeaningController.cs" />
     <Compile Include="Controllers\GiftController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FlowerMeaningModel.cs" />
     <Compile Include="Models\GiftModel.cs" />
     <Compile Include="Models\LayoutMainModel.cs" />
     <Compile Include="Models\ListExtentions.cs" />
@@ -402,6 +404,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Gift\GiftHome.cshtml" />
     <Content Include="Views\Gift\GiftType.cshtml" />
+    <Content Include="Views\Product\FlowerMeaning.cshtml" />
+    <Content Include="Views\FlowerMeaning\FlowerMeaningHome.cshtml" />
+    <Content Include="Views\FlowerMeaning\FlowerMeaningDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlowerMeaningDAL.cs" />
     <Compile Include="GiftDAL.cs" />
     <Compile Include="LayoutDAL.cs" />
     <Compile Include="ProductDAL.cs" />

@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "FlowerMeaningDetail";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb-single breadcrumb_top">
+                    <ul id="breadcrumbs">
+                        <li><a href="/trang-chu"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+                        <li><span>I</span></li>
+                        <li><a href="/y-nghia-hoa">Ý NGHĨA HOA</a></li>
+                        <li><span>I</span></li>
+                        <li><span>@(((string)ViewBag.TENHOA).ToUpper())</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs area -->
+<!-- Start preview Product details area -->
+<div class="blog_single_view_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="my_tabs" style="border: 1px solid #a49c9c;">
+                            <div class="tab-content tab_content_style">
+                                <div class="tab-pane fade in active">
+                                    <div class="blog_tabs" style="padding: 15px;">
+                                        <a class="fancybox" href="~/@ViewBag.HINHANH" data-fancybox-group="gallery"
+                                           title="Ý NGHĨA @(((string)ViewBag.TENHOA).ToUpper())">
+                                            <img src="~/@ViewBag.HINHANH"
+                                                 alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product-bottom">
+                                <div class="maSP">
+                                    @ViewBag.TENHOA
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12 r_item">
+                        <div class="blog_product_details">
+                            <h2 class="blog_heading"><a>Ý NGHĨA @(((string)ViewBag.TENHOA).ToUpper())</a></h2>
+
+                            <div class="pricing_rate">
+                                <p class="blog_texts">
+                                    @Model.mo_ta
+                                </p>
+                            </div>
+
+                        </div>
+                        <ul class="social">
+                            <li>
+                                <a id="ctl00_cphContent_ucItemDetails_hplFacebook" class="fb" title="Facebook"
+                                   href="#">Facebook</a>
+                            </li>
+                            <li>
+                                <a id="ctl00_cphContent_ucItemDetails_hplTwitter" class="tw" title="Twitter"
+                                   href="#">Twitter</a>
+                            </li>
+                            <li>
+                                <a id="ctl00_cphContent_ucItemDetails_hplGoogle" class="g" title="Google +" href="#">
+                                    Google
+                                    +
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row" style="padding: 0 15px;margin-top: 10px;">
+                    <div><h4 class="title-y-nghia-hoa">THÔNG TIN CHI TIẾT</h4></div>
+                    <div>
+                        @Html.Raw(Model.chi_tiet)
+                    </div>
+                </div>
+            </div>
+            <div id="content" class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <div class="rt">
+                    <div class="t">
+                        <div class="order">
+                            <a id="ctl00_cphContent_ucLargeOrder_hplLargeOrder" title="Đặt hoa số lượng lớn"
+                               href="#">
+                                <img id="ctl00_cphContent_ucLargeOrder_imgLargeOrder"
+                                     alt="Đặt hoa số lượng lớn" title="Đặt hoa số lượng lớn"
+                                     src="~/Assets/img/dat-hoa-so-luong-lon.png" style="border-width:0px;">
+                            </a>
+                        </div>
+                        <div class="discount">
+                            <h4>
+                                Giảm 20.000đ
+                            </h4>
+                            <span>
+                                Nhằm khuyến khích mọi người quen sử dụng website trong việc giao dịch thương mại
+                                điện tử, Chúng tôi tặng cho mỗi đơn hàng 20.000đ nều bạn mua hoa trực tiếp từ
+                                webiste.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End preview Product details area -->
+<!-- Start upsell products area -->

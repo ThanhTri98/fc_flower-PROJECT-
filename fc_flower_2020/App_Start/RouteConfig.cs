@@ -9,12 +9,11 @@ namespace fc_flower_2020
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
             routes.MapRoute(
-               name: "HomePage",
-               url: "trang-chu",
-               defaults: new { controller = "Home", action = "Index" }
-           );
+                name: "HomePage",
+                url: "trang-chu",
+                defaults: new { controller = "Home", action = "Index" }
+            );
             routes.MapRoute(
                name: "Profile",
                url: "trang-ca-nhan",
@@ -40,7 +39,16 @@ namespace fc_flower_2020
                        url: "qua-tang-kem",
                        defaults: new { controller = "Gift", action = "GiftHome" }
                    );
-
+            routes.MapRoute(
+            name: "FlowerMeaningDetail",
+            url: "y-nghia-hoa/{ma_y_nghia}",
+            defaults: new { controller = "FlowerMeaning", action = "FlowerMeaningDetail" }
+        );
+            routes.MapRoute(
+             name: "FlowerMeaning",
+             url: "y-nghia-hoa",
+             defaults: new { controller = "FlowerMeaning", action = "FlowerMeaningHome" }
+         );
             routes.MapRoute(
            name: "Cart",
            url: "gio-hang",

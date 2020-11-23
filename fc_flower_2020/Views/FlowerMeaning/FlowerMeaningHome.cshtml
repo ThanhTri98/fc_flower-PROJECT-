@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "FlowerMeaningHome";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb-single breadcrumb_top">
+                    <ul id="breadcrumbs">
+                        <li><a href="/trang-chu"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+                        <li><span>I</span></li>
+                        <li><a>Ý NGHĨA HOA</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs area -->
+<!-- Start preview Product details area -->
+<div class="blog_single_view_area">
+    <div class="container">
+        <div class="row">
+            <div id="left" class="col-lg-9 col-md-6 col-sm-12 col-xs-12 r_item">
+                @{ List<MyDataBase.LoaiHoa> loaiHoas = Model as List<MyDataBase.LoaiHoa>;
+                    int items = 4; // Tổng số item trên 1 hàng
+                    int row = 0; // Khởi tạo cột
+                    int modulo = 0; // Phần dư để tránh trường hợp về tràn mảng hoặc thiếu data
+                    int current = 0; // Index sẽ tăng 1 sau khi 1 sản phẩm được display
+                    if (loaiHoas.Count != 0) // Nếu có giá trị trong List mới bắt đầu gán giá trị
+                    {
+                        if (loaiHoas.Count > items)
+                        {
+                            row = loaiHoas.Count / items;
+                            // Nếu phần dư !=0 thì tăng row lên 1 đồng thời lưu lại phần dư đó
+                        }
+                        if ((modulo = loaiHoas.Count % items) != 0) { ++row; }
+                    }
+
+
+                }
+
+                @for (int i = 0; i < row; i++)
+                {
+                    <div class="row product-margin">
+                        <div class="col-lg-12">
+                            @{ if (i == row - 1)
+                                {
+                                    items = modulo != 0 ? modulo : items;
+                                }
+                            }
+                            @for (int j = 0; j < items; j++)
+                            {
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="product_list">
+                                        <div class="single_product">
+                                            <a href="/y-nghia-hoa/@loaiHoas[current].ma_y_nghia" target="main"><img src="~/@loaiHoas[current].hinh_anh" alt="" /></a>
+                                            <div class="prhoa">
+                                                <div class="title y-nghia-hoa">Ý nghĩa @loaiHoas[current++].ten_loai_hoa</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+            <div id="content" class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                
+                <div class="rt">
+                    <div class="t">
+                        <div class="order">
+                            <a id="ctl00_cphContent_ucLargeOrder_hplLargeOrder" title="Đặt hoa số lượng lớn"
+                               href="#">
+                                <img id="ctl00_cphContent_ucLargeOrder_imgLargeOrder"
+                                     alt="Đặt hoa số lượng lớn" title="Đặt hoa số lượng lớn"
+                                     src="~/Assets/img/dat-hoa-so-luong-lon.png" style="border-width:0px;">
+                            </a>
+                        </div>
+                        <div class="discount">
+                            <h4>
+                                Giảm 20.000đ
+                            </h4>
+                            <span>
+                                Nhằm khuyến khích mọi người quen sử dụng website trong việc giao dịch thương mại
+                                điện tử, Chúng tôi tặng cho mỗi đơn hàng 20.000đ nều bạn mua hoa trực tiếp từ
+                                webiste.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

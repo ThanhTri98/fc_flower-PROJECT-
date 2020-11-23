@@ -14,13 +14,20 @@ namespace fc_flower_2020.Controllers
         // GET: Gift
         public ActionResult GiftHome()
         {
-            return View();
+            List<LoaiQuaTang> loaiQuaTangs = giftModel.getDanhSachLoaiQua();
+            List<List<QuaTangKem>> quaTangKems = new List<List<QuaTangKem>>();
+            foreach (LoaiQuaTang lqt in loaiQuaTangs)
+            {
+                quaTangKems.Add(giftModel.getDanhSachQuaTangKem(lqt.ma_loai, 4));
+            }
+            ViewBag.LIST = Utils.convertStringArray<List<LoaiQuaTang>>(loaiQuaTangs,"");
+            return View(quaTangKems);
         }
         public ActionResult GiftType(string ma_loai)
-        {   
+        {
             List<QuaTangKem> quaTangKems = giftModel.getDanhSachQuaTangKem(ma_loai, 0);
             ViewBag.NAME = giftModel.getTenQuaTang(ma_loai);
-            ViewBag.LIST = Utils.convertStringArray<List<LoaiQuaTang>>(giftModel.getDanhSachLoaiQua(), "") ;
+            ViewBag.LIST = Utils.convertStringArray<List<LoaiQuaTang>>(giftModel.getDanhSachLoaiQua(), "");
             ViewBag.MALOAI = ma_loai;
             return View(quaTangKems);
         }

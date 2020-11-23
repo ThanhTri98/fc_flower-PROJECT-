@@ -1,9 +1,6 @@
 ﻿using fc_flower_2020.Models;
 using MyDataBase;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace fc_flower_2020.Controllers
@@ -39,7 +36,6 @@ namespace fc_flower_2020.Controllers
             ViewBag.CungLoai = productModel.getHoaCungLoai(hoa.ma_loai_hoa);
             return View(hoa);
         }
-
 
     }
 }

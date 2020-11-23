@@ -19,9 +19,6 @@ namespace MyDataBase
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ma_y_nghia { get; set; }
 
-        [StringLength(255)]
-        public string hinh_anh { get; set; }
-
         [Column(TypeName = "ntext")]
         public string mo_ta { get; set; }
 

@@ -34,11 +34,7 @@
                     int current = 0; // Index sẽ tăng 1 sau khi 1 sản phẩm được display
                     if (hoas.Count != 0) // Nếu có giá trị trong List mới bắt đầu gán giá trị
                     {
-                        if (hoas.Count < items)
-                        {
-                            row = 0; // = 0 vì phép chia số nhỏ cho lớn aut0 = 0 -> Cho dù có hoa nhưng vẫn không display lên được
-                        }
-                        else
+                        if (hoas.Count > items)
                         {
                             row = hoas.Count / items;
                             // Nếu phần dư !=0 thì tăng row lên 1 đồng thời lưu lại phần dư đó

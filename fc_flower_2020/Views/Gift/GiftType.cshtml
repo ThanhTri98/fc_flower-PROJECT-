@@ -13,7 +13,7 @@
                     <ul id="breadcrumbs">
                         <li><a href="/trang-chu"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
                         <li><span>I</span></li>
-                        <li><a>QUÀ TẶNG KÈM</a></li>
+                        <li><a href="/qua-tang-kem">QUÀ TẶNG KÈM</a></li>
                         <li><span>I</span></li>
                         <li>@ViewBag.NAME</li>
                     </ul>
@@ -35,19 +35,14 @@
                     int current = 0; // Index sẽ tăng 1 sau khi 1 sản phẩm được display
                     if (quaTangKems.Count != 0) // Nếu có giá trị trong List mới bắt đầu gán giá trị
                     {
-                        if (quaTangKems.Count < items)
-                        {
-                            row = 0; // = 0 vì phép chia số nhỏ cho lớn aut0 = 0 -> Cho dù có hoa nhưng vẫn không display lên được
-                        }
-                        else
+                        if (quaTangKems.Count > items)
                         {
                             row = quaTangKems.Count / items;
                             // Nếu phần dư !=0 thì tăng row lên 1 đồng thời lưu lại phần dư đó
                         }
+
                         if ((modulo = quaTangKems.Count % items) != 0) { ++row; }
                     }
-
-
                 }
 
                 @for (int i = 0; i < row; i++)

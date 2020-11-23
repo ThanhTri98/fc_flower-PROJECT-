@@ -19,5 +19,6 @@ namespace fc_flower_2020.Models
         {
             return gift.getDanhSachQuaTangKem(ma_loai, take);
         }
+       
     }
 }
