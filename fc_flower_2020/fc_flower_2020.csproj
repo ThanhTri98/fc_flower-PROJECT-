@@ -238,6 +238,8 @@
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\plugins.js" />
     <Content Include="Assets\js\price-slider.js" />
+    <Content Include="Assets\js\sendDataAjax\account.js" />
+    <Content Include="Assets\js\sendDataAjax\profile.js" />
     <Content Include="Assets\js\vendor\jquery-1.11.3.min.js" />
     <Content Include="Assets\js\vendor\modernizr-2.8.3.min.js" />
     <Content Include="Assets\js\wow.js" />

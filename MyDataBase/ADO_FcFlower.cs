@@ -1,10 +1,7 @@
+using System.Data.Entity;
+
 namespace MyDataBase
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
     public partial class ADO_FcFlower : DbContext
     {
         public ADO_FcFlower()
@@ -121,15 +118,15 @@ namespace MyDataBase
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.dia_chi)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.gioi_tinh)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.ho_ten)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<YNghiaHoa>()
                 .HasMany(e => e.LoaiHoa)

@@ -1,10 +1,7 @@
-﻿using Antlr.Runtime.Tree;
-using MyDataBase;
-using System;
+﻿using MyDataBase;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace fc_flower_2020.Models
 {
@@ -46,7 +43,18 @@ namespace fc_flower_2020.Models
 
             return rs;
         }
+        public static string ConvertToMD5(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
 
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
     }
 }
 

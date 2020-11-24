@@ -18,6 +18,10 @@ namespace DataAccess
         public void taoTaiKhoan(TaiKhoan taiKhoan)
         {
             aDO_FcFlower.TaiKhoan.Add(taiKhoan);
+            saveChanges();
+        }
+        public void saveChanges()
+        {
             aDO_FcFlower.SaveChanges();
         }
         public bool kiemTraTonTai(string field, string noiDung)
@@ -25,6 +29,10 @@ namespace DataAccess
             if (!field.Equals("tai_khoan") && !field.Equals("email")) return false;
             string sql = "SELECT * FROM TAIKHOAN WHERE " + field + "=@CT";
             return aDO_FcFlower.Database.SqlQuery<TaiKhoan>(sql, new SqlParameter("@CT", noiDung)).FirstOrDefault() != null;
+        }
+        public TaiKhoan getTaiKhoan(string tai_khoan)
+        {
+            return aDO_FcFlower.TaiKhoan.Where(c => c.tai_khoan == tai_khoan).FirstOrDefault();
         }
     }
 }

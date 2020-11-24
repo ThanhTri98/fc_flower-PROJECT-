@@ -20,7 +20,7 @@ namespace fc_flower_2020.Controllers
         public JsonResult Login(FormCollection data)
         {
             string username = data["username"];
-            string password = data["password"];
+            string password = Utils.ConvertToMD5(data["password"]);
             TaiKhoan taiKhoan = new AccountModel().checkLogin(username, password);
             JsonResult jsr = new JsonResult();
             if (taiKhoan == null)
@@ -40,6 +40,7 @@ namespace fc_flower_2020.Controllers
             }
             return Json(jsr, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
         public JsonResult Register(FormCollection data)
         {
             string email = data["email"];
@@ -71,7 +72,7 @@ namespace fc_flower_2020.Controllers
                 string fullname = data["fullname"];
                 TaiKhoan taiKhoan = new TaiKhoan();
                 taiKhoan.tai_khoan = username;
-                taiKhoan.mat_khau = password;
+                taiKhoan.mat_khau = Utils.ConvertToMD5(password);
                 taiKhoan.email = email;
                 taiKhoan.dia_chi = address;
                 taiKhoan.gioi_tinh = gender;
@@ -83,6 +84,109 @@ namespace fc_flower_2020.Controllers
                     status = "OK",
                     message = "Tạo tài khoản thành công, bạn có thể đăng nhập."
                 };
+            }
+            return Json(jsr, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult UpdateInfor(FormCollection data)
+        {
+            string email = data["email"];
+            TaiKhoan taiKhoanSS = Session["TAIKHOAN"] as TaiKhoan;
+            TaiKhoan taiKhoanDB;
+            AccountModel accountModel = new AccountModel();
+            JsonResult jsr = new JsonResult();
+            if (taiKhoanSS == null)
+            {
+                Logout();
+            }
+            else if (!email.Equals(taiKhoanSS.email) && accountModel.kiemTraTonTai("email", email))
+            {
+                jsr.Data = new
+                {
+                    status = "ER",
+                    message = "Địa chỉ Email đã có người sử dụng!"
+                };
+            }
+            else
+            {
+                taiKhoanDB = accountModel.getTaiKhoan(taiKhoanSS.tai_khoan);
+                if (taiKhoanDB == null)
+                {
+                    Logout();
+                }
+                else
+                {
+                    string address = data["address"];
+                    string gender = data["gender"];
+                    string phone = data["phone"];
+                    string fullname = data["fullname"];
+
+                    taiKhoanDB.email = email;
+                    taiKhoanDB.dia_chi = address;
+                    taiKhoanDB.gioi_tinh = gender;
+                    taiKhoanDB.so_dien_thoai = phone;
+                    taiKhoanDB.ho_ten = fullname;
+                    accountModel.saveChanges(); // Lưu lại thay đổi
+                    // Cập nhật lại session
+                    taiKhoanSS.email = email;
+                    taiKhoanSS.dia_chi = address;
+                    taiKhoanSS.gioi_tinh = gender;
+                    taiKhoanSS.so_dien_thoai = phone;
+                    taiKhoanSS.ho_ten = fullname;
+                    jsr.Data = new
+                    {
+                        status = "OK",
+                        message = "Cập nhật thông tin thành công."
+                    };
+                }
+
+            }
+            return Json(jsr, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ChangePassword(FormCollection data)
+        {
+
+            TaiKhoan taiKhoanSS = Session["TAIKHOAN"] as TaiKhoan;
+            TaiKhoan taiKhoanDB;
+            AccountModel accountModel = new AccountModel();
+            JsonResult jsr = new JsonResult();
+            if (taiKhoanSS == null)
+            {
+                Logout();
+            }
+            else
+            {
+                taiKhoanDB = accountModel.getTaiKhoan(taiKhoanSS.tai_khoan);
+                if (taiKhoanDB == null)
+                {
+                    Logout();
+                }
+                else
+                {
+                    string curPassword = Utils.ConvertToMD5(data["curPassword"]); ;
+                    
+                    if (!curPassword.Equals(taiKhoanDB.mat_khau))
+                    {
+                        jsr.Data = new
+                        {
+                            status = "ER"
+                        };
+                    }
+                    else
+                    {
+                        string newPassword = Utils.ConvertToMD5(data["newPassword"]);
+                        taiKhoanDB.mat_khau = newPassword;
+                        accountModel.saveChanges(); // Lưu lại thay đổi
+                        // Cập nhật lại session
+                        taiKhoanSS.mat_khau = newPassword;
+                        jsr.Data = new
+                        {
+                            status = "OK"
+                        };
+                    }
+                }
+
             }
             return Json(jsr, JsonRequestBehavior.AllowGet);
         }

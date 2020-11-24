@@ -17,49 +17,49 @@
                     <div class="new_customer">
                         <h3>Thông tin cá nhân</h3>
                         @{MyDataBase.TaiKhoan taiKhoan = Session["TAIKHOAN"] as MyDataBase.TaiKhoan;}
-                        <form action="#">
+                      
                             <ul class="register_form">
                                 <li>Họ tên<span>*</span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="email_test"  value="@taiKhoan.ho_ten"/>
+                                        <input id="prof-fullname" type="text" class="email_test"  value="@taiKhoan.ho_ten"/>
                                     </div>
                                 </li>
                                 
                                 <li>Giới tính<span>*</span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" value="@taiKhoan.gioi_tinh"/>
+                                        <input id="prof-gender" type="text" class="password" value="@taiKhoan.gioi_tinh"/>
                                     </div>
                                 </li>
                                 <li>Địa chỉ<span>*</span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" value="@taiKhoan.dia_chi"/>
+                                        <input id="prof-address" type="text" class="password" value="@taiKhoan.dia_chi"/>
                                     </div>
                                 </li>
-                                <li>Email<span>*</span></li>
+                                <li>Email<span>*</span><span id="email-warning"></span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" value="@taiKhoan.email"/>
+                                        <input id="prof-email" type="text" class="password" value="@taiKhoan.email"/>
                                     </div>
                                 </li>
-                                <li>Số điện thoại<span>*</span></li>
+                                <li>Số điện thoại<span>*</span><span id="phone-warning"></span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" value="@taiKhoan.so_dien_thoai"/>
+                                        <input id="prof-phone" type="text" class="password" value="@taiKhoan.so_dien_thoai"/>
                                     </div>
                                 </li>
                                 <li>
-                                    <h2><span>*</span>Email đã có người sử dụng!!!</h2>
+                                    <h2 id="update-hidden"><span id="update-warning">*</span></h2>
                                 </li>
                             </ul>
                             <div class="create_button_area">
-                                <button type="submit" class="create_button">
+                                <button id="update-info" class="create_button">
                                     Cập nhật
                                 </button>
                             </div>
-                        </form>
+                    
 
                     </div>
 
@@ -67,42 +67,41 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="new_customer">
                         <h3>Đổi mật khẩu</h3>
-                        <form action="#">
                             <ul class="register_form">
-                                <li>Mật khẩu hiện tại<span>*</span></li>
+                                <li>Mật khẩu hiện tại<span>*</span><span id="cur-pass-warning"></span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="email_test" />
+                                        <input id="cur-pass" type="password" class="email_test" />
                                     </div>
                                 </li>
-                                <li>Mật khẩu mới<span>*</span></li>
+                                <li>Mật khẩu mới<span>*</span><span id="new-pass-warning"></span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" />
+                                        <input id="new-pass" type="password" class="password" />
                                     </div>
                                 </li>
-                                <li>Xác nhận mật khẩu<span>*</span></li>
+                                <li>Xác nhận mật khẩu<span>*</span><span id="retype-pass-warning"></span></li>
                                 <li>
                                     <div class="email_address">
-                                        <input type="text" class="password" />
+                                        <input id="retype-pass" type="password" class="password" />
                                     </div>
                                 </li>
                                 <li>
-                                    <h2><span>*</span>Tài khoản hoặc mật khẩu không chính xác!!!</h2>
+                                    <h2 id="change-pass-hidden"><span id="change-pass-warning">*</span></h2>
                                 </li>
                             </ul>
                             <div class="create_button_area">
-                                <button type="submit" class="create_button">
+                                <button id="change-password" class="create_button">
                                     Đổi mật khẩu
                                 </button>
                             </div>
-                        </form>
-
-
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+    <script src="~/Assets/js/jquery-3.5.1.min.js"></script>
+    <script src="~/Assets/js/sendDataAjax/profile.js"></script>
+
 

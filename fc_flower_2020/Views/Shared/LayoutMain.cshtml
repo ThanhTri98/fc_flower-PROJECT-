@@ -79,8 +79,8 @@
                         <ul id="account_nav">
                             <li>
                                 @{ TaiKhoan taiKhoan = Session["TAIKHOAN"] as TaiKhoan;
-                                    string ho_ten = taiKhoan == null ? "Tài khoản" : taiKhoan.ho_ten;}
-                                <a><i class="fa fa-key"></i>@ho_ten</a>
+                                    string ho_ten = taiKhoan == null ? "Tài khoản" : "xin chào "+taiKhoan.ho_ten;}
+                                <a id="account"><i class="fa fa-key"></i>@ho_ten</a>
                                 <div class="account_menu_list">
                                     <div class="account_single_item">
                                         <ul id="account_single_nav_3">

@@ -22,5 +22,13 @@ namespace fc_flower_2020.Models
         {
             account.taoTaiKhoan(taiKhoan);
         }
+        public void saveChanges()
+        {
+            account.saveChanges();
+        }
+        public TaiKhoan getTaiKhoan(string tai_khoan)
+        {
+            return account.getTaiKhoan(tai_khoan);
+        }
     }
 }
