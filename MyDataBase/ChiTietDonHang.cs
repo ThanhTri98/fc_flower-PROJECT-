@@ -11,24 +11,29 @@ namespace MyDataBase
     {
         [Key]
         [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ma_dh { get; set; }
+        [StringLength(255)]
+        public string ma_dh { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ma_hoa { get; set; }
+        public int ma_loai_hang { get; set; }
 
-        public int ma_qua { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ma_hang { get; set; }
 
         public byte? so_luong { get; set; }
 
         public int? tong_gia { get; set; }
 
+        public virtual QuaTangKem QuaTangKem { get; set; }
+
         public virtual DonHang DonHang { get; set; }
 
         public virtual Hoa Hoa { get; set; }
 
-        public virtual QuaTangKem QuaTangKem { get; set; }
+        public virtual LoaiHang LoaiHang { get; set; }
     }
 }

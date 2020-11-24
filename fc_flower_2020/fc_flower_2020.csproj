@@ -136,6 +136,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\FlowerMeaningModel.cs" />
     <Compile Include="Models\GiftModel.cs" />
     <Compile Include="Models\LayoutMainModel.cs" />
@@ -408,7 +410,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Gift\GiftHome.cshtml" />
     <Content Include="Views\Gift\GiftType.cshtml" />
-    <Content Include="Views\Product\FlowerMeaning.cshtml" />
     <Content Include="Views\FlowerMeaning\FlowerMeaningHome.cshtml" />
     <Content Include="Views\FlowerMeaning\FlowerMeaningDetail.cshtml" />
   </ItemGroup>

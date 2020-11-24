@@ -1,7 +1,10 @@
-using System.Data.Entity;
-
 namespace MyDataBase
 {
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
     public partial class ADO_FcFlower : DbContext
     {
         public ADO_FcFlower()
@@ -14,6 +17,7 @@ namespace MyDataBase
         public virtual DbSet<ChuDe> ChuDe { get; set; }
         public virtual DbSet<DonHang> DonHang { get; set; }
         public virtual DbSet<Hoa> Hoa { get; set; }
+        public virtual DbSet<LoaiHang> LoaiHang { get; set; }
         public virtual DbSet<LoaiHoa> LoaiHoa { get; set; }
         public virtual DbSet<LoaiQuaTang> LoaiQuaTang { get; set; }
         public virtual DbSet<MauSac> MauSac { get; set; }
@@ -33,6 +37,10 @@ namespace MyDataBase
                 .Property(e => e.email)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<ChiTietDonHang>()
+                .Property(e => e.ma_dh)
+                .IsUnicode(false);
+
             modelBuilder.Entity<ChuDe>()
                 .Property(e => e.ma_chu_de)
                 .IsUnicode(false);
@@ -41,6 +49,10 @@ namespace MyDataBase
                 .HasMany(e => e.Hoa)
                 .WithMany(e => e.ChuDe)
                 .Map(m => m.ToTable("HoaTheoChuDe").MapLeftKey("ma_chu_de").MapRightKey("ma_hoa"));
+
+            modelBuilder.Entity<DonHang>()
+                .Property(e => e.ma_dh)
+                .IsUnicode(false);
 
             modelBuilder.Entity<DonHang>()
                 .Property(e => e.tai_khoan)
@@ -66,22 +78,25 @@ namespace MyDataBase
             modelBuilder.Entity<Hoa>()
                 .HasMany(e => e.ChiTietDonHang)
                 .WithRequired(e => e.Hoa)
+                .HasForeignKey(e => e.ma_hang)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LoaiHang>()
+                .HasMany(e => e.ChiTietDonHang)
+                .WithRequired(e => e.LoaiHang)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<LoaiHoa>()
                 .Property(e => e.ma_loai_hoa)
                 .IsUnicode(false);
+
             modelBuilder.Entity<LoaiHoa>()
-             .Property(e => e.hinh_anh)
-             .IsUnicode(false);
-            modelBuilder.Entity<LoaiQuaTang>()
-                .Property(e => e.ma_loai)
+                .Property(e => e.hinh_anh)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LoaiQuaTang>()
-                .HasMany(e => e.QuaTangKem)
-                .WithRequired(e => e.LoaiQuaTang)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.ma_loai)
+                .IsUnicode(false);
 
             modelBuilder.Entity<MauSac>()
                 .Property(e => e.ma_mau_sac)
@@ -98,6 +113,7 @@ namespace MyDataBase
             modelBuilder.Entity<QuaTangKem>()
                 .HasMany(e => e.ChiTietDonHang)
                 .WithRequired(e => e.QuaTangKem)
+                .HasForeignKey(e => e.ma_hang)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TaiKhoan>()
@@ -115,18 +131,6 @@ namespace MyDataBase
             modelBuilder.Entity<TaiKhoan>()
                 .Property(e => e.so_dien_thoai)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.dia_chi)
-                .IsUnicode(true);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.gioi_tinh)
-                .IsUnicode(true);
-
-            modelBuilder.Entity<TaiKhoan>()
-                .Property(e => e.ho_ten)
-                .IsUnicode(true);
 
             modelBuilder.Entity<YNghiaHoa>()
                 .HasMany(e => e.LoaiHoa)

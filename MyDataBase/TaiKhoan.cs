@@ -18,8 +18,7 @@ namespace MyDataBase
         [Key]
         [StringLength(255)]
         public string tai_khoan { get; set; }
-        [StringLength(255)]
-        public string ho_ten { get; set; }
+
         [StringLength(255)]
         public string mat_khau { get; set; }
 
@@ -27,13 +26,16 @@ namespace MyDataBase
         public string email { get; set; }
 
         [StringLength(255)]
-        public string so_dien_thoai { get; set; }
+        public string ho_ten { get; set; }
 
         [StringLength(255)]
         public string dia_chi { get; set; }
 
         [StringLength(255)]
         public string gioi_tinh { get; set; }
+
+        [StringLength(255)]
+        public string so_dien_thoai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonHang> DonHang { get; set; }

@@ -6,23 +6,23 @@ namespace MyDataBase
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ChuDe")]
-    public partial class ChuDe
+    [Table("LoaiHang")]
+    public partial class LoaiHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ChuDe()
+        public LoaiHang()
         {
-            Hoa = new HashSet<Hoa>();
+            ChiTietDonHang = new HashSet<ChiTietDonHang>();
         }
 
         [Key]
-        [StringLength(255)]
-        public string ma_chu_de { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ma_loai_hang { get; set; }
 
         [StringLength(255)]
-        public string ten_chu_de { get; set; }
+        public string ten_loai_hang { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hoa> Hoa { get; set; }
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHang { get; set; }
     }
 }

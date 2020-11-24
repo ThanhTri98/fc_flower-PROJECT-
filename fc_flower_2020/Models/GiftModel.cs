@@ -19,6 +19,9 @@ namespace fc_flower_2020.Models
         {
             return gift.getDanhSachQuaTangKem(ma_loai, take);
         }
-       
+        public QuaTangKem getQuaTangKem(int ma_qua)
+        {
+            return gift.getQuaTangKem(ma_qua);
+        }
     }
 }

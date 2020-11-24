@@ -63,13 +63,14 @@
                                             <div class="product_details">
                                                 <div class="title">@quaTangKems[current].ten_qua</div>
                                                 <div class="price">
-                                                    <span class="popular_price">@Utils.toCurrency((int)@quaTangKems[current++].gia)</span>
+                                                    <span class="popular_price">@Utils.toCurrency((int)quaTangKems[current].gia)</span>
                                                 </div>
                                             </div>
                                             <div class="product_detail">
                                                 <div class="product_button">
                                                     <div class="cart_details">
-                                                        <a href="cart.html" target="blank">Thêm vào giỏ hàng</a>
+                                                        <input type="hidden" class="msp-ajax" value="@quaTangKems[current++].ma_qua">
+                                                        <a class="add-cart-gift a-blank">Thêm vào giỏ hàng</a>
                                                     </div>
                                                 </div>
                                             </div>

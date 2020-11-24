@@ -353,6 +353,40 @@
     <script src="~/Assets/js/plugins.js"></script>
     <!-- main JS  -->
     <script src="~/Assets/js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.add-cart-flower').on('click', function () {
+                let ma_hang = $(this).parent().children('.msp-ajax').val();
+                var formData = new FormData();
+                formData.append('loai-hang', '1');
+                formData.append('ma-hang', ma_hang);
+                formData.append('so-luong', '1');
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/Cart/AddItem', true);
+                xhr.onreadystatechange = function () {
+                    // 1 request gửi đi thì server xử lý qua 4 bước
+                    // -- 1: Gửi Request
+                    // -- 2: Server nhận request
+                    // -- 3: Server xử lý
+                    // -- 4: Server trả về kết quả
+                    if (xhr.readyState == 4 && xhr.status == 200) { // Chỉ bắt sự kiện tại giai đoạn 4 và kết quả trả về có status là 200
+                        var content = xhr.responseText;
+                        var json_data = JSON.parse(content);
+                        if (json_data.Data.status == 'OK') {
+                            // Cap nhat lai UI
+                            console.log(json_data.Data.totalItem);
+                            console.log(json_data.Data.totalPrice);
+                        }
+                    }
+                };
+                xhr.send(formData);
+
+            });
+            $('.add-cart-gift').on('click', function () {
+                let msp = $(this).parent().children('.msp-ajax').val();
+            });
+        });
+    </script>
 </body>
 
 </html>

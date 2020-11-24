@@ -1275,8 +1275,10 @@ ul#nav_menu {
     border: 1px solid #666;
     padding: 6px 10px;
 }
-
-.single_product .product_button .cart_details:hover a[target="blank"] {
+a.a-blank{
+    cursor:pointer;
+}
+.single_product .product_button .cart_details:hover a.a-blank {
     background: #FF343B;
     color: #FFFFFF;
 }
@@ -1286,7 +1288,7 @@ ul#nav_menu {
     width: 100%;
 }
 
-    .cart_details:hover a[target="blank"] {
+    .cart_details:hover a.a-blank {
         border: 1px solid #FF3441;
         color: #FF3441;
     }

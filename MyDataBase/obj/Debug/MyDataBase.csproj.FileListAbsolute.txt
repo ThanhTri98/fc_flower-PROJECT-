@@ -21,3 +21,4 @@ C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower-PROJECT-\MyDataBase\obj\Debug\MyDat
 C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower-PROJECT-\MyDataBase\obj\Debug\MyDataBase.csproj.CopyComplete
 C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower-PROJECT-\MyDataBase\obj\Debug\MyDataBase.dll
 C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower-PROJECT-\MyDataBase\obj\Debug\MyDataBase.pdb
+C:\Users\Vincere\Desktop\FC_FLOWER\fc_flower-PROJECT-\MyDataBase\obj\Debug\MyDataBase.csprojAssemblyReference.cache

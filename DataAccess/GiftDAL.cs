@@ -20,5 +20,9 @@ namespace DataAccess
                 return aDO_FcFlower.QuaTangKem.Where(c => c.ma_loai == ma_loai).Take(take).ToList();
             return aDO_FcFlower.QuaTangKem.Where(c => c.ma_loai == ma_loai).ToList();
         }
+        public QuaTangKem getQuaTangKem(int ma_qua)
+        {
+            return aDO_FcFlower.QuaTangKem.Where(c => c.ma_qua == ma_qua).FirstOrDefault();
+        }
     }
 }
