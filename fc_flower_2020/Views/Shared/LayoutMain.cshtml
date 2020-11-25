@@ -79,7 +79,7 @@
                         <ul id="account_nav">
                             <li>
                                 @{ TaiKhoan taiKhoan = Session["TAIKHOAN"] as TaiKhoan;
-                                    string ho_ten = taiKhoan == null ? "Tài khoản" : "xin chào "+taiKhoan.ho_ten;}
+                                    string ho_ten = taiKhoan == null ? "Tài khoản" : "xin chào " + taiKhoan.ho_ten;}
                                 <a id="account"><i class="fa fa-key"></i>@ho_ten</a>
                                 <div class="account_menu_list">
                                     <div class="account_single_item">
@@ -98,25 +98,57 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="gio-hang">
-                                    <i class="fa fa-shopping-cart"></i>Giỏ hàng <span class="cart_zero">2</span>
+                                @{ fc_flower_2020.Models.Cart cart = Session["CartSession"] as fc_flower_2020.Models.Cart;}
+                                <a href="/gio-hang">
+                                    <i class="fa fa-shopping-cart"></i>Giỏ hàng <span id="cart_zero" class="cart_zero">@(cart!=null?cart.TotalItem()+"":"0")</span>
                                 </a>
                                 <div class="cart_down_area">
-                                    <div class="cart_single"
-                                         style="display: flex;justify-content: center;align-items: center;">
-                                        <a href="#"><img src="~/Assets/img/cart/cart-1.jpg" alt="" /></a>
-                                        <div>
-                                            <h2><a href="#">Pellentesque hendrerit</a></h2>
-                                            <div class="price_cart_contain">
-                                                <p class="amount_cart">1</p>
-                                                <p class="nhan">x</p>
-                                                <p class="price_cart">550.000 đ</p>
+
+                                    @if (cart != null)
+                                    {
+                                        foreach (CartItem items in cart.items)
+                                        {
+                                            <div class="cart_single">
+                                                @if (items.ma_loai_hang == 1)
+                                                {
+                                                    <a href="/chi-tiet-san-pham/@((items.san_pham as Hoa).ma_hoa)"><img src="~/@((items.san_pham as Hoa).hinh_anh)" alt="" /></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/qua-tang-kem/@((items.san_pham as QuaTangKem).ma_loai)"><img src="~/@((items.san_pham as QuaTangKem).hinh_anh)" alt="" /></a>
+                                                }
+
+                                                <div>
+                                                    @if (items.ma_loai_hang == 1)
+                                                    {
+                                                        <h2><a>@((items.san_pham as Hoa).tieu_de)</a></h2>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2><a>@((items.san_pham as QuaTangKem).ten_qua)</a></h2>
+                                                    }
+
+                                                    <div class="price_cart_contain">
+                                                        <p class="amount_cart">@items.so_luong</p>
+                                                        <p class="nhan">x</p>
+                                                        @if (items.ma_loai_hang == 1)
+                                                        {
+                                                            <p class="price_cart">@(fc_flower_2020.Models.Utils.toCurrency((int)(items.san_pham as Hoa).gia_moi))</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="price_cart">@(fc_flower_2020.Models.Utils.toCurrency((int)(items.san_pham as QuaTangKem).gia))</p>
+                                                        }
+
+                                                    </div>
+                                                </div>
                                             </div>
+                                        }
+
+                                        <div class="cart_shoptings">
+                                            <a href="/gio-hang">THANH TOÁN</a>
                                         </div>
-                                    </div>
-                                    <div class="cart_shoptings">
-                                        <a href="checkout.html">THANH TOÁN</a>
-                                    </div>
+                                    }
                                 </div>
                             </li>
                         </ul>
@@ -355,37 +387,64 @@
     <script src="~/Assets/js/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            // Thêm mới 1 item
             $('.add-cart-flower').on('click', function () {
                 let ma_hang = $(this).parent().children('.msp-ajax').val();
                 var formData = new FormData();
                 formData.append('loai-hang', '1');
                 formData.append('ma-hang', ma_hang);
                 formData.append('so-luong', '1');
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '/Cart/AddItem', true);
-                xhr.onreadystatechange = function () {
-                    // 1 request gửi đi thì server xử lý qua 4 bước
-                    // -- 1: Gửi Request
-                    // -- 2: Server nhận request
-                    // -- 3: Server xử lý
-                    // -- 4: Server trả về kết quả
-                    if (xhr.readyState == 4 && xhr.status == 200) { // Chỉ bắt sự kiện tại giai đoạn 4 và kết quả trả về có status là 200
-                        var content = xhr.responseText;
-                        var json_data = JSON.parse(content);
-                        if (json_data.Data.status == 'OK') {
-                            // Cap nhat lai UI
-                            console.log(json_data.Data.totalItem);
-                            console.log(json_data.Data.totalPrice);
-                        }
-                    }
-                };
-                xhr.send(formData);
+                sendData(formData);
 
             });
             $('.add-cart-gift').on('click', function () {
-                let msp = $(this).parent().children('.msp-ajax').val();
+                let ma_hang = $(this).parent().children('.msp-ajax').val();
+                var formData = new FormData();
+                formData.append('loai-hang', '2');
+                formData.append('ma-hang', ma_hang);
+                formData.append('so-luong', '1');
+                sendData(formData);
+                
+            });
+            // Cập nhật số lượng item
+            $('.update-item').on('change', function () {
+                var so_luong = $(this).val();
+                var ma_hang = $(this).parent().children('.msp-ajax').val();
+                var loai_hang = $(this).parent().children('.loai-hang').val();
+                var formData = new FormData();
+                formData.append('loai-hang', loai_hang);
+                formData.append('ma-hang', ma_hang);
+                formData.append('so-luong', so_luong);
+                formData.append('isUpdate', '1');
+                sendData(formData,ma_hang,loai_hang);
             });
         });
+        function sendData(formData,ma_hang,ma_loai_hang) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Cart/CartProcess', true);
+            xhr.onreadystatechange = function () {
+                // 1 request gửi đi thì server xử lý qua 4 bước
+                // -- 1: Gửi Request
+                // -- 2: Server nhận request
+                // -- 3: Server xử lý
+                // -- 4: Server trả về kết quả
+                if (xhr.readyState == 4 && xhr.status == 200) { // Chỉ bắt sự kiện tại giai đoạn 4 và kết quả trả về có status là 200
+                    var content = xhr.responseText;
+                    var json_data = JSON.parse(content);
+                    if (json_data.Data.status == 'OK') {
+                        // Cap nhat lai UI
+                        $('#cart_zero').html('').html(json_data.Data.totalItem);
+                        $('#totalPrice').html('').html(json_data.Data.totalPrice)
+                        if (ma_hang !== undefined) {
+                            let id = ma_loai_hang + '-' + ma_hang;
+                            $('#' + id).html('').html(json_data.Data.totalPriceOfItem);
+
+                        }
+                    }
+                }
+            };
+            xhr.send(formData);
+        }
     </script>
 </body>
 

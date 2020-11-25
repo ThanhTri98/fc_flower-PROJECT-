@@ -548,9 +548,7 @@ input[type="text"], input[type="password"] {
 
 .cart_single {
     padding: 10px;
-    margin-bottom: 30px;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -589,7 +587,7 @@ input[type="text"], input[type="password"] {
 }
 
 .account_card_area ul#account_nav li div.cart_down_area .cart_single a {
-    color: #888;
+    color: #444;
     margin: 0;
 }
 

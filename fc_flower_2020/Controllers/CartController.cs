@@ -2,8 +2,6 @@
 using MyDataBase;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace fc_flower_2020.Controllers
@@ -18,25 +16,26 @@ namespace fc_flower_2020.Controllers
         {
             return View();
         }
-        public JsonResult AddItem(FormCollection data)
+        public JsonResult CartProcess(FormCollection data)
         {
-            string loai_hang = data["loai-hang"];
+            string ma_loai_hang = data["loai-hang"];
             string ma_hang = data["ma-hang"];
-            string so_luong = data["so-luong"];
-            string update = data["update"];
-            int soLuong;
-
-
+            string so_luongAjax = data["so-luong"];
+            string isUpdate = data["isUpdate"];
+            int soLuong = 0;
+            int gia = 0;
             Object sp = null;
             try
             {
-                if (loai_hang == "1")
+                if (ma_loai_hang == "1")
                 {
                     sp = product.getHoa(int.Parse(ma_hang));
+                    gia = (int)(sp as Hoa).gia_moi;
                 }
-                else if (loai_hang == "2")
+                else
                 {
                     sp = gift.getQuaTangKem(int.Parse(ma_hang));
+                    gia = (int)(sp as QuaTangKem).gia;
                 }
             }
             catch (Exception)
@@ -46,15 +45,15 @@ namespace fc_flower_2020.Controllers
             if (sp != null)
             {
                 Cart cart = Session[cartSession] as Cart;
-                if (!String.IsNullOrEmpty(so_luong))
+                if (!String.IsNullOrEmpty(so_luongAjax)) // Thêm hoặc cập nhật số lượng item
                 {
-                    soLuong = Convert.ToInt32(so_luong);
+                    soLuong = Convert.ToInt32(so_luongAjax);
                     if (cart == null)
                     {
                         cart = new Cart();
                         List<CartItem> items = new List<CartItem>();
                         CartItem item = new CartItem();
-                        if (loai_hang == "1")
+                        if (ma_loai_hang == "1")
                         {
                             Hoa hoa = sp as Hoa;
                             item.ma_loai_hang = 1;
@@ -79,53 +78,35 @@ namespace fc_flower_2020.Controllers
                     {
                         List<CartItem> items = cart.items;
                         bool check = false;
-                        if (loai_hang == "1")
+                        foreach (CartItem i in items)
                         {
-                            foreach (CartItem i in items)
+                            int id = typeof(Hoa).IsInstanceOfType(i.san_pham) ? (i.san_pham as Hoa).ma_hoa : (i.san_pham as QuaTangKem).ma_qua;
+                            if (ma_hang == id + "")
                             {
+                                if (isUpdate == null)
+                                {
+                                    i.so_luong = i.so_luong + 1;
+                                }
+                                else
+                                {
+                                    i.so_luong = soLuong;
+                                }
+                                check = true;
+                                break;
+                            }
+                        }
 
-                                if ((i.ma_hang == (sp as Hoa).ma_hoa))
-                                {
-                                    if (update == null && soLuong == 1)
-                                    {
-                                        i.so_luong = i.so_luong + 1;
-                                    }
-                                    else
-                                    {
-                                        i.so_luong = soLuong;
-                                    }
-                                    check = true;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            foreach (CartItem i in items)
-                            {
-                                if ((i.ma_hang == (sp as QuaTangKem).ma_qua))
-                                {
-                                    if (update == null && soLuong == 1)
-                                    {
-                                        i.so_luong = i.so_luong + 1;
-                                    }
-                                    else
-                                    {
-                                        i.so_luong = soLuong;
-                                    }
-                                    check = true;
-                                }
-                            }
-                        }
                         if (!check)
                         {
                             CartItem item = new CartItem();
                             item.so_luong = soLuong;
-                            if (loai_hang == "1")
+                            if (ma_loai_hang == "1")
                             {
                                 Hoa hoa = sp as Hoa;
                                 item.san_pham = hoa;
                                 item.gia = (int)hoa.gia_moi;
                                 item.ma_hang = hoa.ma_hoa;
+                                item.ma_loai_hang = 1;
                             }
                             else
                             {
@@ -133,34 +114,63 @@ namespace fc_flower_2020.Controllers
                                 item.san_pham = quaTangKem;
                                 item.gia = (int)quaTangKem.gia;
                                 item.ma_hang = quaTangKem.ma_qua;
+                                item.ma_loai_hang = 2;
                             }
                             items.Add(item);
                         }
                     }
                 }
-                else
+                else // Xóa 1 item ra giỏ hàng
                 {
-                    //xoa 1 item ra gio hang
-                    //List<Item> items = gh.Item;
-                    //foreach (Item item in items)
-                    //{
-                    //    if (item.Product.ProductId == sp.ProductId)
-                    //    {
-                    //        items.Remove(item);
-                    //        break;
-                    //    }
-                    //}
+                    List<CartItem> items = cart.items;
+                    if (ma_loai_hang == "1")
+                    {
+                        foreach (CartItem item in items)
+                        {
+                            if (item.ma_hang == (sp as Hoa).ma_hoa)
+                            {
+                                items.Remove(item);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (CartItem item in items)
+                        {
+                            if (item.ma_hang == (sp as QuaTangKem).ma_qua)
+                            {
+                                items.Remove(item);
+                                break;
+                            }
+                        }
+                    }
+
                 }
-                Session.Add(cartSession,cart);
+                Session.Add(cartSession, cart);
             }
             JsonResult jsr = new JsonResult();
             Cart currentCart = Session[cartSession] as Cart;
-            jsr.Data = new
-            {   
-                status = "OK",
-                totalItem = currentCart.TotalItem().ToString(), 
-                totalPrice = Utils.toCurrency(currentCart.TotalPrice())
-            };
+            if (isUpdate == null)
+            {
+                jsr.Data = new
+                {
+                    status = "OK",
+                    totalItem = currentCart.TotalItem().ToString(),
+                    totalPrice = Utils.toCurrency(currentCart.TotalPrice())
+                };
+            }
+            else
+            {
+                jsr.Data = new
+                {
+                    status = "OK",
+                    totalItem = currentCart.TotalItem().ToString(),
+                    totalPrice = Utils.toCurrency(currentCart.TotalPrice()),
+                    totalPriceOfItem = Utils.toCurrency(soLuong * gia)
+                };
+            }
+
             return Json(jsr, JsonRequestBehavior.AllowGet);
         }
     }

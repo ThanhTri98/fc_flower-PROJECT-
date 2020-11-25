@@ -1,16 +1,19 @@
-﻿
+﻿@using MyDataBase
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
-    <div class="checkout_accrodion_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                    <div class="cart_title">
-                        <h2>Giỏ hàng</h2>
-                    </div>
+<div class="checkout_accrodion_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="cart_title">
+                    <h2>Giỏ hàng</h2>
+                </div>
+                @{ fc_flower_2020.Models.Cart cart = Session["CartSession"] as fc_flower_2020.Models.Cart;}
+                @if (cart != null)
+                {
                     <div class="accordion" id="accordion2">
                         <div class="panel accordion-group">
                             <div class="accordion-heading" id="headingFour">
@@ -43,6 +46,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="panel accordion-group">
                             <div class="accordion-heading" id="headingFive">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
@@ -50,11 +54,11 @@
                                     <span>2</span>Xem Giỏ Hàng
                                 </a>
                             </div>
+
                             <div id="collapseFive" class="panel-collapse collapse" aria-labelledby="headingFive">
                                 <div class="accordion-inner">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
                                             <div id="cart-container" class="accordion_total_pricing">
                                                 <div id="title" class="flexBox-flex">
                                                     <div class="img-item">Hình ảnh</div>
@@ -63,70 +67,80 @@
                                                     <div class="price-item">Tổng giá</div>
                                                     <div class="del-item">Xóa</div>
                                                 </div>
-                                                <div class="item-cart flexBox-flex">
-                                                    <div class="img-item  it-img">
-                                                        <img src="~/Assets/img/product/pr1.jpg"
-                                                             width="100" height="120" />
-                                                    </div>
-                                                    <div class="title-item  it-title">Cánh én sắc xuân </div>
-                                                    <div class="amout-item  it-am">
-                                                        <select name="amout">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
+                                                @foreach (fc_flower_2020.Models.CartItem items in cart.items)
+                                                {
+                                                    <div class="item-cart flexBox-flex">
+                                                        <div class="img-item  it-img">
+                                                            @if (items.ma_loai_hang == 1)
+                                                            {
+                                                                <img src="~/@((items.san_pham as Hoa).hinh_anh)"
+                                                                     width="100" height="120" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="~/@((items.san_pham as QuaTangKem).hinh_anh)"
+                                                                     width="100" height="120" />
+                                                            }
+
+                                                        </div>
+                                                        @if (items.ma_loai_hang == 1)
+                                                        {
+                                                            <div class="title-item it-title">@((items.san_pham as Hoa).tieu_de)</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="title-item it-title">@((items.san_pham as QuaTangKem).ten_qua)</div>
+                                                        }
+
+                                                    <div class="amout-item it-am">
+                                                        @if (items.ma_loai_hang == 1)
+                                                        {
+                                                            <input type="hidden" class="loai-hang" value="1" />
+                                                            <input type="hidden" class="msp-ajax" value="@((items.san_pham as Hoa).ma_hoa)" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" class="loai-hang" value="2" />
+                                                            <input type="hidden" class="msp-ajax" value="@((items.san_pham as QuaTangKem).ma_qua)" />
+                                                        }
+                                                        <select class="update-item" name="amout">
+                                                            @for (int i = 1; i <= 10; i++)
+                                                            {
+                                                                if (items.so_luong != i)
+                                                                {
+                                                                    <option value="@i">@i</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option selected value="@i">@i</option>
+                                                                }
+                                                            }
                                                         </select>
                                                     </div>
-                                                    <div class="price-item it-pri">1.500.000 đ</div>
-                                                    <div class="del-item it-del">
-                                                        <a href="#">
-                                                            <i class="fa fa-trash"
-                                                               aria-hidden="true"></i>
-                                                        </a>
+                                                        @if (items.ma_loai_hang == 1)
+                                                        {
+                                                            <div id="1-@((items.san_pham as Hoa).ma_hoa)" class="price-item it-pri">@(fc_flower_2020.Models.Utils.toCurrency((int)((items.san_pham as Hoa).gia_moi*items.so_luong)))</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div id="2-@((items.san_pham as QuaTangKem).ma_qua)" class="price-item it-pri">@(fc_flower_2020.Models.Utils.toCurrency((int)((items.san_pham as QuaTangKem).gia*items.so_luong)))</div>
+                                                        }
+                                                        <div class="del-item it-del">
+                                                            <a href="#">
+                                                                <i class="fa fa-trash"
+                                                                   aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="item-cart flexBox-flex">
-                                                    <div class="img-item  it-img">
-                                                        <img src="~/Assets/img/product/pr1.jpg"
-                                                             width="100" height="120" />
-                                                    </div>
-                                                    <div class="title-item  it-title">Cánh én sắc xuân </div>
-                                                    <div class="amout-item  it-am">
-                                                        <select name="amout">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="price-item it-pri">1.500.000 đ</div>
-                                                    <div class="del-item it-del">
-                                                        <a href="#">
-                                                            <i class="fa fa-trash"
-                                                               aria-hidden="true"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                }
                                             </div>
                                             <div id="sum" class="flexBox-centerAll">
                                                 <div>
                                                     <span>TỔNG HÓA ĐƠN: </span>
-                                                    <strong>3.000.000 đ</strong>
-
+                                                    <strong id="totalPrice">@fc_flower_2020.Models.Utils.toCurrency(cart.TotalPrice())</strong>
                                                 </div>
                                                 <div class="Continue_button continue_top place_order">
-                                                    <button type="submit" title="Submit Review" class="button">
-                                                        Đặt
-                                                        hàng
-                                                    </button>
+                                                    <button id="order" type="submit" title="Đặt hàng" class="button">Đặt hàng</button>
                                                 </div>
                                             </div>
 
@@ -136,19 +150,24 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <div class="check_progress">
-                        <h2>CÁC LƯU Ý KHI ĐẶT HÀNG</h2>
-                        <ul id="progress_btn">
-                            <li><i class="fa fa-minus"></i>Hoa sẽ được giao trong vòng 2 giờ</li>
-                            <li><i class="fa fa-minus"></i>Giữ điện thoại để shipper liên hệ</li>
-                            <li><i class="fa fa-minus"></i>Bạn sẽ chịu trách nhiệm khi bùng kèo</li>
-                            <li><i class="fa fa-minus"></i>Thanh toán Online sẽ được giảm 10.000 đồng</li>
-                        </ul>
-                    </div>
+                }
+                else
+                {
+                    <div>Giỏ hàng trống lỗng</div>
+                }
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="check_progress">
+                    <h2>CÁC LƯU Ý KHI ĐẶT HÀNG</h2>
+                    <ul id="progress_btn">
+                        <li><i class="fa fa-minus"></i>Hoa sẽ được giao trong vòng 2 giờ</li>
+                        <li><i class="fa fa-minus"></i>Giữ điện thoại để shipper liên hệ</li>
+                        <li><i class="fa fa-minus"></i>Bạn sẽ chịu trách nhiệm khi bùng kèo</li>
+                        <li><i class="fa fa-minus"></i>Thanh toán Online sẽ được giảm 10.000 đồng</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 

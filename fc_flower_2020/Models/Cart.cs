@@ -33,7 +33,6 @@ namespace fc_flower_2020.Models
                     price += i.gia * i.so_luong;
                 }
             }
-
             return price;
         }
     }
