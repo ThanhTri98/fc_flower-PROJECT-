@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDAL.cs" />
+    <Compile Include="CartDAL.cs" />
     <Compile Include="FlowerMeaningDAL.cs" />
     <Compile Include="GiftDAL.cs" />
     <Compile Include="LayoutDAL.cs" />

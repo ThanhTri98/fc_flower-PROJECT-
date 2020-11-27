@@ -1,3 +1,62 @@
+/*GIOHANG*/
+.text-content {
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+    color: #a70909;
+    width: max-content;
+}
+
+.modal-footer .btn-cf, .modal-footer .tbn-cancle {
+    border: none;
+    color: white;
+    background: #157d56;
+    border-radius: 2px;
+    padding: 3px 7px !important;
+    transition: all .3s;
+}
+
+.modal-footer .tbn-cancle {
+    background: #9a3e37;
+}
+
+    .modal-footer .tbn-cancle:hover {
+        background: #bf453e;
+    }
+
+.modal-footer .btn-cf {
+    margin-right: 48px;
+    font-size: 15px;
+}
+
+    .modal-footer .btn-cf:hover {
+        background: #16b280;
+    }
+
+.modal-confirm .modal-footer {
+    padding-top: 0;
+    border-top: none;
+}
+
+.modal-confirm .modal-dialog {
+    margin-top: 15%;
+}
+
+.modal-confirm .modal-content {
+    border: none;
+    border-radius: 3px;
+}
+
+#noti-cart-empty {
+    text-align: center;
+}
+
+    #noti-cart-empty p:nth-child(1) {
+        font-size: 23px;
+        font-weight: bold;
+        color: #dc2a6d;
+    }
+
 .product-margin {
     margin-bottom: 20px;
 }
@@ -367,7 +426,11 @@ a {
 /*----------------------------------------*/
 
 .header_area_top {
-    padding: 30px 0;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 999;
 }
 
 .search_box {
@@ -422,7 +485,7 @@ input[type="text"], input[type="password"] {
 
 .account_card_area {
     float: right;
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
     .account_card_area ul#account_nav li {
@@ -1198,6 +1261,7 @@ ul#nav_menu {
         font-weight: bold;
         line-height: 22px;
     }
+
 .title-y-nghia-hoa {
     font-weight: bold;
     color: white;
@@ -1206,6 +1270,7 @@ ul#nav_menu {
     width: fit-content;
     font-size: 15px;
 }
+
 .prhoa .y-nghia-hoa {
     font-size: 14px;
     background: #bebebe85;
@@ -1213,19 +1278,19 @@ ul#nav_menu {
     overflow: hidden;
 }
 
-    .product_details .regular_price {
-        color: #898989;
-        text-decoration: line-through;
-        font-size: 14px;
-        font-weight: 500;
-        margin-right: 10px
-    }
+.product_details .regular_price {
+    color: #898989;
+    text-decoration: line-through;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px
+}
 
-    .product_details .popular_price {
-        color: #ff343b;
-        font-size: 17px;
-        font-weight: 600;
-    }
+.product_details .popular_price {
+    color: #ff343b;
+    font-size: 17px;
+    font-weight: 600;
+}
 
 .star_icon {
     color: #FEB21F;
@@ -1273,9 +1338,11 @@ ul#nav_menu {
     border: 1px solid #666;
     padding: 6px 10px;
 }
-a.a-blank{
-    cursor:pointer;
+
+a.a-blank {
+    cursor: pointer;
 }
+
 .single_product .product_button .cart_details:hover a.a-blank {
     background: #FF343B;
     color: #FFFFFF;

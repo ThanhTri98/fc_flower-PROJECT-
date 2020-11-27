@@ -40,7 +40,12 @@ function sendDataLogin() {
             var content = xhr.responseText;
             var json_data = JSON.parse(content);
             if (json_data.Data.status == 'OK') {
-                window.location = 'trang-chu';
+                if (json_data.Data.link_cart != null) {
+                    window.location = json_data.Data.link_cart;
+                } else {
+                    window.location = 'trang-chu';
+                }
+
             } else {
                 hiddden.css('display', 'block');
                 warning.html('Tài khoản hoặc Mật khẩu không chính xác!');
@@ -78,7 +83,7 @@ function sendDataRegister() {
         $('#password-warning').html(''); err = false;
     }
     if (!(regex_email.test(email))) {
-       
+
         $('#email-warning').html(' Email sai định dạng!');
         err = true;
     } else {

@@ -22,8 +22,8 @@ namespace MyDataBase
         [StringLength(255)]
         public string tai_khoan { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? ngay_mua { get; set; }
+        [StringLength(50)]
+        public string ngay_mua { get; set; }
 
         public int? ma_pttt { get; set; }
 

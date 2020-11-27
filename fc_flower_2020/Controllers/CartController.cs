@@ -23,19 +23,25 @@ namespace fc_flower_2020.Controllers
             string so_luongAjax = data["so-luong"];
             string isUpdate = data["isUpdate"];
             int soLuong = 0;
-            int gia = 0;
+            // Response
+            int gia_rp = 0;
+
             Object sp = null;
             try
             {
                 if (ma_loai_hang == "1")
                 {
-                    sp = product.getHoa(int.Parse(ma_hang));
-                    gia = (int)(sp as Hoa).gia_moi;
+                    Hoa hoa = product.getHoa(int.Parse(ma_hang));
+                    sp = hoa;
+                    gia_rp = (int)hoa.gia_moi;
+
                 }
                 else
                 {
-                    sp = gift.getQuaTangKem(int.Parse(ma_hang));
-                    gia = (int)(sp as QuaTangKem).gia;
+                    QuaTangKem qua = gift.getQuaTangKem(int.Parse(ma_hang));
+                    sp = qua;
+                    gia_rp = (int)qua.gia;
+
                 }
             }
             catch (Exception)
@@ -80,8 +86,8 @@ namespace fc_flower_2020.Controllers
                         bool check = false;
                         foreach (CartItem i in items)
                         {
-                            int id = typeof(Hoa).IsInstanceOfType(i.san_pham) ? (i.san_pham as Hoa).ma_hoa : (i.san_pham as QuaTangKem).ma_qua;
-                            if (ma_hang == id + "")
+                            //int id = typeof(Hoa).IsInstanceOfType(i.san_pham) ? (i.san_pham as Hoa).ma_hoa : (i.san_pham as QuaTangKem).ma_qua;
+                            if (ma_hang == i.ma_hang + "")
                             {
                                 if (isUpdate == null)
                                 {
@@ -123,29 +129,16 @@ namespace fc_flower_2020.Controllers
                 else // Xóa 1 item ra giỏ hàng
                 {
                     List<CartItem> items = cart.items;
-                    if (ma_loai_hang == "1")
-                    {
-                        foreach (CartItem item in items)
-                        {
-                            if (item.ma_hang == (sp as Hoa).ma_hoa)
-                            {
-                                items.Remove(item);
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        foreach (CartItem item in items)
-                        {
-                            if (item.ma_hang == (sp as QuaTangKem).ma_qua)
-                            {
-                                items.Remove(item);
-                                break;
-                            }
-                        }
-                    }
 
+                    foreach (CartItem i in items)
+                    {
+                        //int id = typeof(Hoa).IsInstanceOfType(i.san_pham) ? (i.san_pham as Hoa).ma_hoa : (i.san_pham as QuaTangKem).ma_qua;
+                        if (ma_hang == i.ma_hang + "")
+                        {
+                            items.Remove(i);
+                            break;
+                        }
+                    }
                 }
                 Session.Add(cartSession, cart);
             }
@@ -167,11 +160,24 @@ namespace fc_flower_2020.Controllers
                     status = "OK",
                     totalItem = currentCart.TotalItem().ToString(),
                     totalPrice = Utils.toCurrency(currentCart.TotalPrice()),
-                    totalPriceOfItem = Utils.toCurrency(soLuong * gia)
+                    totalPriceOfItem = Utils.toCurrency(soLuong * gia_rp),
                 };
             }
 
             return Json(jsr, JsonRequestBehavior.AllowGet);
+        }
+        public void Order(string pttt)
+        {
+            Cart cart = Session[cartSession] as Cart;
+            TaiKhoan taiKhoan = Session["TAIKHOAN"] as TaiKhoan;
+            if (cart.items.Count != 0)
+            {
+                cart.tai_khoan = taiKhoan.tai_khoan;
+                cart.ma_pttt = int.Parse(pttt);
+                new Cart().addToCart(cart);
+                cart.items.Clear();
+            }
+            Response.Redirect("/gio-hang");
         }
     }
 }

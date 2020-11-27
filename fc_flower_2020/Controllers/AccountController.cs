@@ -23,6 +23,7 @@ namespace fc_flower_2020.Controllers
             string password = Utils.ConvertToMD5(data["password"]);
             TaiKhoan taiKhoan = new AccountModel().checkLogin(username, password);
             JsonResult jsr = new JsonResult();
+            string link = Session["link-cart"] as string;
             if (taiKhoan == null)
             {
                 jsr.Data = new
@@ -35,7 +36,8 @@ namespace fc_flower_2020.Controllers
                 Session.Add("TAIKHOAN", taiKhoan);
                 jsr.Data = new
                 {
-                    status = "OK"
+                    status = "OK",
+                    link_cart = link
                 };
             }
             return Json(jsr, JsonRequestBehavior.AllowGet);

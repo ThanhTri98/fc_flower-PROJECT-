@@ -24,7 +24,7 @@ namespace MyDataBase
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ma_hang { get; set; }
 
-        public byte? so_luong { get; set; }
+        public int? so_luong { get; set; }
 
         public int? tong_gia { get; set; }
 

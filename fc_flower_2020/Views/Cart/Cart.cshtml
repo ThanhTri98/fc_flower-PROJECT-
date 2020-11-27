@@ -12,7 +12,7 @@
                     <h2>Giỏ hàng</h2>
                 </div>
                 @{ fc_flower_2020.Models.Cart cart = Session["CartSession"] as fc_flower_2020.Models.Cart;}
-                @if (cart != null)
+                @if (cart != null && cart.items.Count != 0)
                 {
                     <div class="accordion" id="accordion2">
                         <div class="panel accordion-group">
@@ -29,13 +29,13 @@
                                             <ul class="billing_in">
                                                 <li>
                                                     <input id="r1" type="radio" name="billing[use_for_shipping]"
-                                                           value="1" checked="checked" title="Ship to this address"
+                                                           value="1" checked="checked" title="Thanh toán khi nhận hàng"
                                                            class="radio">
                                                     <label for="r1">Thanh toán khi nhận hàng</label>
                                                 </li>
                                                 <li>
                                                     <input id="r2" type="radio" name="billing[use_for_shipping]"
-                                                           value="0" title="Ship to different address" class="radio">
+                                                           value="0" title="Thanh toán online" class="radio">
                                                     <label for="r2">Thanh toán Online</label>
                                                 </li>
 
@@ -70,6 +70,16 @@
                                                 @foreach (fc_flower_2020.Models.CartItem items in cart.items)
                                                 {
                                                     <div class="item-cart flexBox-flex">
+                                                        @if (items.ma_loai_hang == 1)
+                                                        {
+                                                            <input type="hidden" class="loai-hang" value="1" />
+                                                            <input type="hidden" class="msp-ajax" value="@((items.san_pham as Hoa).ma_hoa)" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" class="loai-hang" value="2" />
+                                                            <input type="hidden" class="msp-ajax" value="@((items.san_pham as QuaTangKem).ma_qua)" />
+                                                        }
                                                         <div class="img-item  it-img">
                                                             @if (items.ma_loai_hang == 1)
                                                             {
@@ -92,41 +102,32 @@
                                                             <div class="title-item it-title">@((items.san_pham as QuaTangKem).ten_qua)</div>
                                                         }
 
-                                                    <div class="amout-item it-am">
+                                                        <div class="amout-item it-am">
+
+                                                            <select class="update-item" name="amout">
+                                                                @for (int i = 1; i <= 10; i++)
+                                                                {
+                                                                    if (items.so_luong != i)
+                                                                    {
+                                                                        <option value="@i">@i</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option selected value="@i">@i</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </div>
                                                         @if (items.ma_loai_hang == 1)
                                                         {
-                                                            <input type="hidden" class="loai-hang" value="1" />
-                                                            <input type="hidden" class="msp-ajax" value="@((items.san_pham as Hoa).ma_hoa)" />
+                                                            <div id="1-@((items.san_pham as Hoa).ma_hoa)" class="price-item it-pri">@(fc_flower_2020.Models.Utils.toCurrency((int)((items.san_pham as Hoa).gia_moi * items.so_luong)))</div>
                                                         }
                                                         else
                                                         {
-                                                            <input type="hidden" class="loai-hang" value="2" />
-                                                            <input type="hidden" class="msp-ajax" value="@((items.san_pham as QuaTangKem).ma_qua)" />
-                                                        }
-                                                        <select class="update-item" name="amout">
-                                                            @for (int i = 1; i <= 10; i++)
-                                                            {
-                                                                if (items.so_luong != i)
-                                                                {
-                                                                    <option value="@i">@i</option>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <option selected value="@i">@i</option>
-                                                                }
-                                                            }
-                                                        </select>
-                                                    </div>
-                                                        @if (items.ma_loai_hang == 1)
-                                                        {
-                                                            <div id="1-@((items.san_pham as Hoa).ma_hoa)" class="price-item it-pri">@(fc_flower_2020.Models.Utils.toCurrency((int)((items.san_pham as Hoa).gia_moi*items.so_luong)))</div>
-                                                        }
-                                                        else
-                                                        {
-                                                            <div id="2-@((items.san_pham as QuaTangKem).ma_qua)" class="price-item it-pri">@(fc_flower_2020.Models.Utils.toCurrency((int)((items.san_pham as QuaTangKem).gia*items.so_luong)))</div>
+                                                            <div id="2-@((items.san_pham as QuaTangKem).ma_qua)" class="price-item it-pri">@(fc_flower_2020.Models.Utils.toCurrency((int)((items.san_pham as QuaTangKem).gia * items.so_luong)))</div>
                                                         }
                                                         <div class="del-item it-del">
-                                                            <a href="#">
+                                                            <a class="del-item">
                                                                 <i class="fa fa-trash"
                                                                    aria-hidden="true"></i>
                                                             </a>
@@ -140,7 +141,31 @@
                                                     <strong id="totalPrice">@fc_flower_2020.Models.Utils.toCurrency(cart.TotalPrice())</strong>
                                                 </div>
                                                 <div class="Continue_button continue_top place_order">
-                                                    <button id="order" type="submit" title="Đặt hàng" class="button">Đặt hàng</button>
+                                                    @{ TaiKhoan taiKhoan = Session["TAIKHOAN"] as TaiKhoan;}
+                                                    @if (taiKhoan != null)
+                                                    {
+                                                        <button id="order" onclick="addToCart()" type="submit" title="Đặt hàng" class="button">Đặt hàng</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button data-toggle="modal" data-target="#checkout" id="order" title="Đặt hàng">ĐẶT HÀNG</button>
+                                                        <div id="checkout" class="modal fade modal-confirm" role="dialog">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <p class="text-content">Đăng nhập để thực hiện đặt hàng!</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        @{Session.Add("link-cart", "/gio-hang");}
+                                                                        <button type="button" onclick="return location.href='/tai-khoan'" class="btn-cf">Đăng nhập</button>
+                                                                        <button type="button" class="tbn-cancle" data-dismiss="modal">Hủy</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
                                                 </div>
                                             </div>
 
@@ -153,7 +178,10 @@
                 }
                 else
                 {
-                    <div>Giỏ hàng trống lỗng</div>
+                    <div id="noti-cart-empty">
+                        <p>Chưa có gì trong giỏ</p>
+                        <p>Nhấn vào <a href="/trang-chu">đây</a> để tiếp tục mua hàng.</p>
+                    </div>
                 }
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -170,4 +198,14 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    
+    function addToCart() {
+        var rd_checked = document.getElementById('r1');
+        var pttt = 1;
+        if (rd_checked.checked === false) {
+            pttt = 2;
+        }
+        window.location = 'Cart/Order?pttt=' + pttt;
+    }
+</script>

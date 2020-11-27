@@ -102,54 +102,7 @@
                                 <a href="/gio-hang">
                                     <i class="fa fa-shopping-cart"></i>Giỏ hàng <span id="cart_zero" class="cart_zero">@(cart!=null?cart.TotalItem()+"":"0")</span>
                                 </a>
-                                <div class="cart_down_area">
-
-                                    @if (cart != null)
-                                    {
-                                        foreach (CartItem items in cart.items)
-                                        {
-                                            <div class="cart_single">
-                                                @if (items.ma_loai_hang == 1)
-                                                {
-                                                    <a href="/chi-tiet-san-pham/@((items.san_pham as Hoa).ma_hoa)"><img src="~/@((items.san_pham as Hoa).hinh_anh)" alt="" /></a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="/qua-tang-kem/@((items.san_pham as QuaTangKem).ma_loai)"><img src="~/@((items.san_pham as QuaTangKem).hinh_anh)" alt="" /></a>
-                                                }
-
-                                                <div>
-                                                    @if (items.ma_loai_hang == 1)
-                                                    {
-                                                        <h2><a>@((items.san_pham as Hoa).tieu_de)</a></h2>
-                                                    }
-                                                    else
-                                                    {
-                                                        <h2><a>@((items.san_pham as QuaTangKem).ten_qua)</a></h2>
-                                                    }
-
-                                                    <div class="price_cart_contain">
-                                                        <p class="amount_cart">@items.so_luong</p>
-                                                        <p class="nhan">x</p>
-                                                        @if (items.ma_loai_hang == 1)
-                                                        {
-                                                            <p class="price_cart">@(fc_flower_2020.Models.Utils.toCurrency((int)(items.san_pham as Hoa).gia_moi))</p>
-                                                        }
-                                                        else
-                                                        {
-                                                            <p class="price_cart">@(fc_flower_2020.Models.Utils.toCurrency((int)(items.san_pham as QuaTangKem).gia))</p>
-                                                        }
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-
-                                        <div class="cart_shoptings">
-                                            <a href="/gio-hang">THANH TOÁN</a>
-                                        </div>
-                                    }
-                                </div>
+                                
                             </li>
                         </ul>
                     </div>
@@ -404,22 +357,32 @@
                 formData.append('ma-hang', ma_hang);
                 formData.append('so-luong', '1');
                 sendData(formData);
-                
+
             });
             // Cập nhật số lượng item
             $('.update-item').on('change', function () {
                 var so_luong = $(this).val();
-                var ma_hang = $(this).parent().children('.msp-ajax').val();
-                var loai_hang = $(this).parent().children('.loai-hang').val();
+                var ma_hang = $(this).parent().parent().children('.msp-ajax').val();
+                var loai_hang = $(this).parent().parent().children('.loai-hang').val();
                 var formData = new FormData();
                 formData.append('loai-hang', loai_hang);
                 formData.append('ma-hang', ma_hang);
                 formData.append('so-luong', so_luong);
                 formData.append('isUpdate', '1');
-                sendData(formData,ma_hang,loai_hang);
+                sendData(formData, ma_hang, loai_hang);
             });
         });
-        function sendData(formData,ma_hang,ma_loai_hang) {
+        $('.del-item').on('click', function () {
+            var parent = $(this).parent().parent();
+            var ma_hang = parent.children('.msp-ajax').val();
+            var loai_hang = parent.children('.loai-hang').val();
+            var formData = new FormData();
+            formData.append('ma-hang', ma_hang);
+            formData.append('loai-hang', loai_hang);
+            sendData(formData, parent);
+            parent.remove();
+        });
+        function sendData(formData, ma_hang, ma_loai_hang) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/Cart/CartProcess', true);
             xhr.onreadystatechange = function () {
@@ -434,17 +397,18 @@
                     if (json_data.Data.status == 'OK') {
                         // Cap nhat lai UI
                         $('#cart_zero').html('').html(json_data.Data.totalItem);
+                        
                         $('#totalPrice').html('').html(json_data.Data.totalPrice)
-                        if (ma_hang !== undefined) {
+                        if (ma_loai_hang !== undefined) { // update
                             let id = ma_loai_hang + '-' + ma_hang;
                             $('#' + id).html('').html(json_data.Data.totalPriceOfItem);
-
                         }
                     }
                 }
             };
             xhr.send(formData);
         }
+       
     </script>
 </body>
 
